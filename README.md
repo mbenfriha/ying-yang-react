@@ -26,4 +26,3 @@ If you need isomorphic code or server-side rendering, don't use it now.
 - Redux-form.
 - Redux-saga.
 - Redux-thunk.
-- 
