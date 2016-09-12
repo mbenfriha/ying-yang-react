@@ -1,10 +1,14 @@
 # ying-yang-react
 
-React boilerplate for starting fast non-isomorphic project.
+React Ying Yangt consist on a React boilerplate who can pretend to consume any API and make component test.
 
-React Ying Yangt consist on a React boilerplate who can pretend to consume any API.
+We will produce a boilerplate with 3 way :
 
-If you need isomorphic code or server-side rendering, don't use it now.
+- Simple and elegant.
+- Use latest package.
+- If you need more, do it.
+
+We will use server-side rendering asap.
 
 # Dev dependency
 
