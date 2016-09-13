@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "React boilerplate with WebPack 2, Babel, Redux, Ramda, HMR, Enzyme, Selenium ...",
   "scripts": {
-    "start": "webpack-dashboard -- node __env__/webpack.dev.js",
+    "start": "webpack-dashboard -c blue -- node __env__/webpack.dev.js",
     "build": "rm -rf dist && ./node_modules/.bin/webpack --config __env__/webpack.prod.js",
     "test": "jest",
     "test:watch": "npm test -- --watch",
