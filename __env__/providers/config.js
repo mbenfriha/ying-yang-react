@@ -10,8 +10,7 @@ const postcss = [
   require('css-mqpacker')(),
 ];
 
-const configuration = {
-  context: core.root,
+module.exports = {
   entry: core.entry,
   output: {
     path: core.assets_path,
@@ -20,14 +19,16 @@ const configuration = {
   },
   resolve: {
     extensions: ['', '.js', '.jsx', '.css', '.json'],
-    modules: [core.root, 'node_modules'],
+    alias: {
+      root: helpers.root('../../client/'),
+    },
   },
   module: {
     preLoaders: [
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
         loader: 'eslint',
-        exclude: [/node_modules/, /__env__/],
+        exclude: [/node_modules/],
       }
     ],
     loaders: [
@@ -37,7 +38,7 @@ const configuration = {
           // 'react-hot',
           'babel',
         ],
-        exclude: [/node_modules/, /__env__/],
+        exclude: [/node_modules/],
       },
       {
         test: /\.css$/,
@@ -53,19 +54,22 @@ const configuration = {
       },
     ],
   },
+  babel: {
+    babelrc: helpers.root('../../client/.babelrc'),
+  },
   postcss,
-  plugins: [],
+  eslint: {
+    configFile: helpers.root('../../.eslintrc'),
+    formatter: require('eslint-friendly-formatter'),
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: helpers.root('../../client/index.html'),
+      inject: true,
+    })
+  ],
   devServer: {
-    headers: { "Access-Control-Allow-Origin": "*" }
+    headers: { 'Access-Control-Allow-Origin': '*' }
   },
 };
-
-configuration.plugins.push(
-  new HtmlWebpackPlugin({
-    filename: 'index.html',
-    template: 'index.html',
-    inject: true,
-  })
-);
-
-module.exports = configuration;

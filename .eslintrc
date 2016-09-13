@@ -2,7 +2,7 @@ root:
   true
 
 extends:
-  eslint-config-airbnb
+  airbnb
 
 parser:
   babel-eslint
@@ -31,4 +31,4 @@ rules:
   no-param-reassign: 0
 
 plugins:
-  react
+- react

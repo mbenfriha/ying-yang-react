@@ -36,7 +36,6 @@ const compiler = webpack(provider);
 compiler.apply(new DashboardPlugin());
 
 const server = new WebpackDevServer(compiler, {
-  contentBase: helpers.root('../client/'),
   hot: false,
   historyApiFallback: true,
   compress: true,

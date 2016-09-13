@@ -24,9 +24,9 @@ function buildRow(fields, row, rowIndex) {
 function buildBody(fields, data) {
   return (
     <Body>
-        {
-          data.map((row, index) => buildRow(fields, row, index))
-        }
+    {
+      data.map((row, index) => buildRow(fields, row, index))
+    }
     </Body>
   );
 }

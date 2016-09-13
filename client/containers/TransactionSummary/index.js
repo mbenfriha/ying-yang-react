@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import Grid from 'components/Grid';
+import Grid from '../../components/Grid';
 
 const { string, shape, arrayOf, object } = PropTypes;
 

@@ -2,12 +2,11 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import Header from 'components/Header';
-import Grid from 'components/Grid';
-import TransactionForm from 'containers/TransactionForm';
-import TransactionSummary from 'containers/TransactionSummary';
-import * as AppActions from 'actions';
-import './style.css';
+import Header from '../../components/Header';
+import Grid from '../../components/Grid';
+import TransactionForm from '../TransactionForm';
+import TransactionSummary from '../TransactionSummary';
+import * as AppActions from '../../actions';
 
 class App extends Component {
   static propTypes = {

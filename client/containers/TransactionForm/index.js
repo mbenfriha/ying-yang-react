@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import Grid from 'components/Grid';
+import Grid from '../../components/Grid';
 
 export default class TransactionForm extends Component {
   static propTypes = {
@@ -18,7 +18,7 @@ export default class TransactionForm extends Component {
     const value = parseFloat(valueField.value, 10);
     const description = descField.value;
 
-    if (value === 0  || isNaN(value) || description.length === 0) {
+    if (value === 0 || isNaN(value) || description.length === 0) {
       return;
     }
 

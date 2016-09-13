@@ -1,11 +1,8 @@
 'use strict';
 
-const helpers = require('./helpers');
-
 module.exports = {
-  root: helpers.root('../../client/'),
   entry: {
-    app: ['./index.js', './style.css'],
+    app: ['./client/index.js', './client/style.css'],
     vendor: ['react', 'ramda'],
   },
   port: 3000,

@@ -2,7 +2,6 @@ table {
     border-collapse: collapse;
     padding: 3px;
     user-select: none;
-    -webkit-user-select: none;
     cursor: default;
 }
 
