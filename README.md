@@ -12,18 +12,74 @@ Warning : if you need isomorphic code (client-side / server-side), move to iso-y
 
 # Content
 
-- WebPack 2 with dev/prod configuration and 3-shaking.
+- WebPack 2 with dev/prod configuration, 3-shaking, multiple loader/plugins.
+- HMR with React Hot Loader.
 - Axios (Http Request).
-- Jest (Testing).
-- HMR with React Hot Loader (Development).
+- Jest & Enzyme (Testing).
+- Selenium Web Driver (E2E).
 - Babel stage-0 (for productive code).
 - Flow (Type).
 - EsLint (with AirBnB configuration).
 - Ramda (FP).
-- React.
-- React-Dom.
-- React-Router.
-- Redux.
-- Redux-form.
-- Redux-saga.
-- Redux-thunk.
+- React with : react-dom, react-router.
+- Redux with : redux-form, redux-saga, redux-thunk.
+- Autoprefixer + CSS mqPacker
+-  
+
+# Install
+
+```sh
+git clone https://github.com/kMeillet/ying-yang-react
+cd ying-yang-react/
+npm i
+```
+
+# Script
+
+### Run server (dev)
+
+```sh
+npm start
+```
+
+### Run build (prod)
+
+```sh
+npm run build
+```
+
+### Run test (Jest)
+
+```sh
+npm run test
+```
+
+### Run test (Jest) watch server
+
+```sh
+npm run test:watch
+```
+
+### Run E2E test (Selenium)
+
+```sh
+npm run e2e
+```
+
+### Run test suite (Jest + Selenium)
+
+```sh
+npm run suite
+```
+
+### Deploy
+
+```sh
+npm run publish
+```
+
+### Update packages
+
+```sh
+npm run updates
+```
