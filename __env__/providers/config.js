@@ -10,6 +10,15 @@ const postcss = [
   require('css-mqpacker')(),
 ];
 
+const eslint = {
+  configFile: helpers.root('../../.eslintrc'),
+  formatter: require('eslint-friendly-formatter'),
+};
+
+const babel = {
+  babelrc: helpers.root('../../client/.babelrc'),
+};
+
 module.exports = {
   entry: core.entry,
   output: {
@@ -54,14 +63,9 @@ module.exports = {
       },
     ],
   },
-  babel: {
-    babelrc: helpers.root('../../client/.babelrc'),
-  },
+  babel,
   postcss,
-  eslint: {
-    configFile: helpers.root('../../.eslintrc'),
-    formatter: require('eslint-friendly-formatter'),
-  },
+  eslint,
   plugins: [
     new HtmlWebpackPlugin({
       filename: 'index.html',
