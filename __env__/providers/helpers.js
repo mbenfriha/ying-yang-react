@@ -8,5 +8,5 @@ module.exports = {
   },
   loaderPredicate(include = 'css') {
     return loader => loader.loaders && loader.loaders.includes(include);
-  }
+  },
 };

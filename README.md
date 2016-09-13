@@ -14,6 +14,7 @@ Warning : if you need isomorphic code (client-side / server-side), move to iso-y
 
 - WebPack 2 with dev/prod configuration, 3-shaking, multiple loader/plugins.
 - HMR with React Hot Loader.
+- Perfect CSS support : Autoprefixer + CSS mqPacker + CSS Comb.
 - Axios (Http Request).
 - Jest & Enzyme (Testing).
 - Selenium Web Driver (E2E).
@@ -21,10 +22,8 @@ Warning : if you need isomorphic code (client-side / server-side), move to iso-y
 - Flow (Type).
 - EsLint (with AirBnB configuration).
 - Ramda (FP).
-- React with : react-dom, react-router.
+- React with : react-dom, react-router, react-redux.
 - Redux with : redux-form, redux-saga, redux-thunk.
-- Autoprefixer + CSS mqPacker
--  
 
 # Install
 
