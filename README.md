@@ -1,5 +1,9 @@
 # ying-yang-react
 
+![](http://image.noelshack.com/fichiers/2016/37/1473789222-sucess.jpg)
+
+![](http://image.noelshack.com/fichiers/2016/37/1473789284-screen-1.jpg)
+
 React Ying Yang consist on a React boilerplate who can pretend to consume any API and make component testable and re-usable.
 
 We will produce a boilerplate with 3 way :
