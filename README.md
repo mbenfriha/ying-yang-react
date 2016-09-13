@@ -1,6 +1,6 @@
 # ying-yang-react
 
-React Ying Yangt consist on a React boilerplate who can pretend to consume any API and make component test.
+React Ying Yang consist on a React boilerplate who can pretend to consume any API and make component test.
 
 We will produce a boilerplate with 3 way :
 
@@ -10,21 +10,18 @@ We will produce a boilerplate with 3 way :
 
 We will use server-side rendering asap.
 
-# Dev dependency
+# Content
 
-- WebPack 2 (Build).
+- WebPack 2 with dev/prod configuration and 3-shaking.
 - Axios (Http Request).
 - Jest (Testing).
-- Sequential (E2E).
-- HMR (Development).
+- HMR with React (Development).
 - Babel stage-0 (for productive code).
 - Flow (Type).
 - EsLint (with AirBnB configuration).
 - Ramda (FP).
-
-# Front dependency
-
 - React.
+- React-Dom.
 - React-Router.
 - Redux.
 - Redux-form.
