@@ -71,7 +71,6 @@ module.exports = {
       filename: 'index.html',
       template: helpers.root('../../client/index.html'),
       inject: true,
-      minify: true,
     })
   ],
   devServer: {

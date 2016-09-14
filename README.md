@@ -30,6 +30,7 @@ Warning : if you need isomorphic code (client-side / server-side), move to iso-y
 - Ramda (FP).
 - React with : react-dom, react-router, react-redux.
 - Redux with : redux-form, redux-saga, redux-thunk.
+- Support for Redux DevTools : https://github.com/zalmoxisus/redux-devtools-extension
 
 # Install
 
