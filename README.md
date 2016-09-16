@@ -34,6 +34,8 @@ Warning : if you need isomorphic code (client-side / server-side), move to iso-y
 
 # Install
 
+You need Node.js >= 6 and NPM >= 3.
+
 ```sh
 git clone https://github.com/kMeillet/ying-yang-react
 cd ying-yang-react/
@@ -89,3 +91,30 @@ npm run publish
 ```sh
 npm run updates
 ```
+
+# FAQ
+
+### New router ?
+
+React Router v4 doc : https://github.com/ReactTraining/react-router/blob/v4/README.md
+
+### Why are you using Decorators ? Spec can change and break code !
+
+If you don't need decorators :
+ 
+- Remove "transform-decorators" in .babelrc file.
+- Remove "babel-transform-decorators" in .package.json file.
+
+### Why Ramda ? We have Underscore or Lodash !
+
+Ramda has a more focused goal.
+
+Ramda use pattern like iterable, transducer.
+
+Ramda is designed specifically for a functional programming style, one that makes it easy to create functional pipelines, one that never mutates user data.
+
+Doc : http://ramdajs.com/0.22.1/docs/
+
+### How i can add vendor in my project ?
+
+You can add/remove vendor file in "src/vendor.js".

@@ -3,43 +3,37 @@
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 const DashboardPlugin = require('webpack-dashboard/plugin');
-const helpers = require('./providers/helpers');
-const core = require('./providers/core');
-const provider = require('./providers/config');
+const provider = require('./providers');
+const { port, baseUrl, extraGlobalPlugins } = require('./providers/config');
+const { isLoader, listen, provideServer } = require('./providers/helpers');
 
 provider.devtool = 'cheap-eval-source-map';
-provider.output.publicPath = `http://localhost:${core.port}${core.assets_url}`;
+provider.output.publicPath = `http://localhost:${port}${baseUrl}`;
 provider.output.path = '/__tmp__/';
 
-Object
-  .keys(provider.entry)
-  .forEach(k => provider.entry[k].unshift('webpack/hot/only-dev-server'));
-
 provider.plugins.push(
-  new webpack.DefinePlugin({
-    'process.env.NODE_ENV': JSON.stringify('development')
-  }),
+  new webpack.DefinePlugin(
+    Object.assign(
+      { 'process.env.NODE_ENV': JSON.stringify('development') },
+      extraGlobalPlugins
+    )
+  ),
   new webpack.NoErrorsPlugin(),
   new webpack.HotModuleReplacementPlugin(),
   new DashboardPlugin()
 );
 
-/**
- * Add style loader in development
- */
+provideServer(provider);
+
 provider
   .module
   .loaders
-  .filter(helpers.loaderPredicate())
+  .filter(isLoader('css'))
   .forEach(loader => {
     loader.loaders = ['style', ...loader.loaders];
   });
 
-const compiler = webpack(provider);
-
-compiler.apply(new DashboardPlugin());
-
-const server = new WebpackDevServer(compiler, {
+listen(new WebpackDevServer(webpack(provider), {
   hot: true,
   historyApiFallback: true,
   compress: true,
@@ -51,13 +45,6 @@ const server = new WebpackDevServer(compiler, {
     aggregateTimeout: 300,
     poll: 50,
   },
-});
-
-server.listen(core.port, 'localhost', error => {
-  if (error) {
-    console.log(error);
-    return;
-  }
-
-  console.log(`===> Server started on http://localhost:${core.port}`);
-});
+}), 'localhost', port)
+  .then(response => console.log(response))
+  .catch(error => console.log(error));

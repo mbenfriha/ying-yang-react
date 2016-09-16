@@ -4,9 +4,9 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const AssetsPlugin = require('assets-webpack-plugin');
-const helpers = require('./providers/helpers');
-const core = require('./providers/core');
-const provider = require('./providers/config');
+const provider = require('./providers');
+const { output, extraGlobalPlugins } = require('./providers/config');
+const { isLoader } = require('./providers/helpers');
 
 provider.devtool = false;
 provider.output.filename = '[name].[chunkhash:8].js';
@@ -14,9 +14,12 @@ provider.output.filename = '[name].[chunkhash:8].js';
 provider.plugins.push(
   new ProgressBarPlugin(),
   new ExtractTextPlugin('[name].[contenthash:8].css'),
-  new webpack.DefinePlugin({
-    'process.env.NODE_ENV': JSON.stringify('production'),
-  }),
+  new webpack.DefinePlugin(
+    Object.assign(
+      { 'process.env.NODE_ENV': JSON.stringify('production') },
+      extraGlobalPlugins
+    )
+  ),
   new webpack.LoaderOptionsPlugin({
     minimize: true,
   }),
@@ -26,7 +29,7 @@ provider.plugins.push(
     },
     comments: false,
   }),
-  new AssetsPlugin({ filename: `${core.assets_path}assets.json` })
+  new AssetsPlugin({ filename: `${output}assets.json` })
 );
 
 /**
@@ -35,7 +38,7 @@ provider.plugins.push(
 provider
   .module
   .loaders
-  .filter(helpers.loaderPredicate())
+  .filter(isLoader('css'))
   .forEach(loader => {
     loader.loader = ExtractTextPlugin.extract(loader.loaders);
 
