@@ -2,10 +2,10 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import Header from '../../components/Header';
+import TopHeader from '../../components/TopHeader/TopHeader';
 import Grid from '../../components/Grid';
-import TransactionForm from '../TransactionForm';
-import TransactionSummary from '../TransactionSummary';
+import TransactionForm from '../TransactionForm/TransactionForm';
+import TransactionSummary from '../TransactionSummary/TransactionSummary';
 import * as AppActions from '../../actions';
 
 class App extends Component {
@@ -18,6 +18,7 @@ class App extends Component {
 
   componentWillMount() {
     const { transactions, actions } = this.props;
+
     actions.requestSum(transactions);
   }
 
@@ -31,7 +32,7 @@ class App extends Component {
 
     return (
       <div className="viewport">
-        <Header addTodo={actions.addTodo} />
+        <TopHeader addTodo={actions.addTodo} />
         <Grid fields={gridFields} data={transactions}>
           <TransactionForm action={actions.addTransaction}/>
           <TransactionSummary data={summary} fields={gridFields} />
@@ -43,6 +44,7 @@ class App extends Component {
 
 function mapStateToProps(state) {
   const { transactions } = state;
+
   return {
     transactions: transactions.transactions,
     summary: transactions.summary,

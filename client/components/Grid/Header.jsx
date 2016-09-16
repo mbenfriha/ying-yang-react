@@ -2,21 +2,22 @@ import React, { Component, PropTypes } from 'react';
 
 export default class Header extends Component {
   static propTypes = {
-    children: PropTypes.node.isRequired
+    children: PropTypes.node.isRequired,
   };
 
   static childContextTypes = {
-    header: PropTypes.bool
+    header: PropTypes.bool,
   };
 
   getChildContext() {
     return {
-      header: true
+      header: true,
     };
   }
 
   render() {
     const { children } = this.props;
+
     return (
       <thead>{children}</thead>
     );

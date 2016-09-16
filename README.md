@@ -24,7 +24,7 @@ Warning : if you need isomorphic code (client-side / server-side), move to iso-y
 - Axios (Http Request).
 - Jest & Enzyme (Testing).
 - Selenium Web Driver (E2E).
-- Babel stage-0 (for productive code).
+- Babel stage-0 + Decorator plugin (for productive code).
 - Flow (Type).
 - EsLint (with AirBnB configuration).
 - Ramda (FP).

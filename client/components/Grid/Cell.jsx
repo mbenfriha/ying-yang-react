@@ -13,7 +13,7 @@ const Cell = ({ text, className, children }, { header }) => {
 };
 
 Cell.contextTypes = {
-  header: PropTypes.bool
+  header: PropTypes.bool,
 };
 
 export default Cell;

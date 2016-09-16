@@ -7,10 +7,9 @@ import Cell from './Cell';
 
 export { Grid };
 export { Header };
+export { Footer };
 export { Body };
 export { Row };
 export { Cell };
 
-export default Object.assign(Grid, {
-  Header, Footer, Body, Row, Cell
-});
+export default Object.assign(Grid, { Header, Footer, Body, Row, Cell });

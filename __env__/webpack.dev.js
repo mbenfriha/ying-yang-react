@@ -11,12 +11,16 @@ provider.devtool = 'cheap-eval-source-map';
 provider.output.publicPath = `http://localhost:${core.port}${core.assets_url}`;
 provider.output.path = '/__tmp__/';
 
+Object
+  .keys(provider.entry)
+  .forEach(k => provider.entry[k].unshift('webpack/hot/only-dev-server'));
+
 provider.plugins.push(
   new webpack.DefinePlugin({
     'process.env.NODE_ENV': JSON.stringify('development')
   }),
-  new webpack.HotModuleReplacementPlugin(),
   new webpack.NoErrorsPlugin(),
+  new webpack.HotModuleReplacementPlugin(),
   new DashboardPlugin()
 );
 
@@ -36,7 +40,7 @@ const compiler = webpack(provider);
 compiler.apply(new DashboardPlugin());
 
 const server = new WebpackDevServer(compiler, {
-  hot: false,
+  hot: true,
   historyApiFallback: true,
   compress: true,
   quiet: false,

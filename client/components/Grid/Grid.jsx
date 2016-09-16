@@ -24,9 +24,7 @@ function buildRow(fields, row, rowIndex) {
 function buildBody(fields, data) {
   return (
     <Body>
-    {
-      data.map((row, index) => buildRow(fields, row, index))
-    }
+    { data.map((row, index) => buildRow(fields, row, index)) }
     </Body>
   );
 }
@@ -44,17 +42,18 @@ export default class Grid extends Component {
 
   render() {
     const { fields, data, children } = this.props;
+
     return (
       <table>
         <Header>
           <Row>
             {
-              fields.map((field, index) => {
+              fields.map(({ name, className }, index) => {
                 return (
                   <Cell
-                    text={field.name}
+                    text={name}
                     key={`th${index}`}
-                    className={field.className}
+                    className={className}
                   />
                 );
               })
@@ -62,7 +61,7 @@ export default class Grid extends Component {
           </Row>
         </Header>
         { buildBody(fields, data) }
-        {children}
+        { children }
       </table>
     );
   }

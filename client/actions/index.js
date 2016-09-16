@@ -3,7 +3,7 @@ export const DELETE_TRANSACTION = 'DELETE_TRANSACTION';
 export const GET_TRANSACTION_GRID_FIELDS = 'GET_TRANSACTION_GRID_FIELDS';
 export const REQUEST_SUM = 'REQUEST_SUM';
 
-function createTransaction(transaction) {
+export function createTransaction(transaction) {
   return {
     type: ADD_TRANSACTION,
     transaction,

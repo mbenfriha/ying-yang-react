@@ -15,7 +15,8 @@ export default class TransactionForm extends Component {
   submitForm() {
     const { valueField, descField } = this.refs;
     const { action } = this.props;
-    const value = parseFloat(valueField.value, 10);
+
+    const value = parseFloat(valueField.value);
     const description = descField.value;
 
     if (value === 0 || isNaN(value) || description.length === 0) {
@@ -25,12 +26,11 @@ export default class TransactionForm extends Component {
     action({ value, description });
 
     valueField.value = descField.value = '';
+
     descField.focus();
   }
 
   render() {
-    const onFieldKeyUp = this.onFieldKeyUp.bind(this);
-
     return (
       <Grid.Footer>
         <Grid.Row>
@@ -39,7 +39,7 @@ export default class TransactionForm extends Component {
               name="description"
               placeholder="Description"
               ref="descField"
-              onKeyUp={onFieldKeyUp}
+              onKeyUp={::this.onFieldKeyUp}
             />
           </Grid.Cell>
           <Grid.Cell>
@@ -47,7 +47,7 @@ export default class TransactionForm extends Component {
               name="value"
               placeholder="Value"
               ref="valueField"
-              onKeyUp={onFieldKeyUp}
+              onKeyUp={::this.onFieldKeyUp}
               type="number"
               step="any"
             />

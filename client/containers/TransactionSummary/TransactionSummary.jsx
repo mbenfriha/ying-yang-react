@@ -14,19 +14,19 @@ export default class TransactionSummary extends Component {
 
   render() {
     const { fields, data } = this.props;
+
     return (
       <Grid.Footer>
         <Grid.Row>
           {
-            fields.map((field, index) => {
-              return (
+            fields.map(({ mapping, className }, index) => (
                 <Grid.Cell
-                  text={data[field.mapping]}
-                  className={field.className}
+                  text={data[mapping]}
+                  className={className}
                   key={`tf${index}`}
                 />
-              );
-            })
+              )
+            )
           }
         </Grid.Row>
       </Grid.Footer>
