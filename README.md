@@ -117,4 +117,4 @@ Doc : http://ramdajs.com/0.22.1/docs/
 
 ### How i can add vendor in my project ?
 
-You can add/remove vendor file in "src/vendor.js".
+You can add/remove vendor file in "client/vendor.js".
