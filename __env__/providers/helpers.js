@@ -1,6 +1,7 @@
 'use strict';
 
 const path = require('path');
+const { port } = require('./config');
 
 module.exports = {
   root(...args) {
@@ -23,6 +24,6 @@ module.exports = {
   provideServer(provider) {
     Object
       .keys(provider.entry)
-      .forEach(k => provider.entry[k].unshift('webpack/hot/only-dev-server'));
+      .forEach(k => provider.entry[k].unshift(`webpack-dev-server/client?http://0.0.0.0:$[port}`, 'webpack/hot/only-dev-server'));
   },
 };
