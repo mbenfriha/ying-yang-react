@@ -95,13 +95,34 @@ npm run updates
 
 # FAQ
 
-### Why i can't use class, this, 
+### I can't use class and this, what the hell ?
+
+The project follow my personal opinion of "good practice" for React :
+
+- 2x indent space.
+- Don't use of : arguments, class, delete, events, getter, setter, let, var loops, statement.
+- 0 mutations.
+- No var/let, only const.
+- Never use this.
+- Don't use null or undefined.
+- Don't use ES6 Proxy. 
+- Don't use rest parameters.
+- Don't write unused expression.
+- Don't use valueOf.
+- You can use "console" object (but don't forget to disable this rule before production).
+- Default ES6 import without name permitted for merging component.
+- Write component as function, forget React.createClass or React.Component.
+- You can use strings refs in component. (this rule will be removed soon).
+- Stateless function please.
+- For the rest, we follow AirBnB JavaScript standard + React plugin rules.
 
 ### New router ?
 
 React Router v4 doc : https://github.com/ReactTraining/react-router/blob/v4/README.md
 
 ### Why are you using Decorators ? Spec can change and break code !
+
+Decorator are nice shortcut (for example, if you need to enforce context, you can use @autobinding decorator).
 
 If you don't need decorators :
  
@@ -115,6 +136,8 @@ Ramda has a more focused goal.
 Ramda use pattern like iterable, transducer.
 
 Ramda is designed specifically for a functional programming style, one that makes it easy to create functional pipelines, one that never mutates user data.
+
+Ramda can work with React very well.
 
 Doc : http://ramdajs.com/0.22.1/docs/
 
