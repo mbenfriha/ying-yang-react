@@ -37,7 +37,7 @@ export default class TransactionForm extends Component {
     return (
       <Grid.Footer>
         <Grid.Row>
-          <Grid.Cell>
+          <Grid.Cell header={false}>
             <input
               name="description"
               placeholder="Description"
@@ -45,7 +45,7 @@ export default class TransactionForm extends Component {
               onKeyUp={this.onFieldKeyUp}
             />
           </Grid.Cell>
-          <Grid.Cell>
+          <Grid.Cell header={false}>
             <input
               name="value"
               placeholder="Value"

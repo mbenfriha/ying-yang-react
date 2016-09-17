@@ -22,13 +22,11 @@ import {
 function addTransaction(state, action) {
   const { description, value } = action.transaction;
 
-  const newState = [...state, {
+  return [...state, {
     id: state.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1,
     description,
     value,
   }];
-
-  return newState;
 }
 
 /**
@@ -38,15 +36,12 @@ function addTransaction(state, action) {
  * @return {Object}        Default state
  */
 function transactions(state = defaultTransactions, action) {
-  let newState;
-
   switch (action.type) {
     case ADD_TRANSACTION:
       return addTransaction(state, action);
 
     case DELETE_TRANSACTION:
-      newState = state.filter(todo => todo.id !== action.id);
-      return newState;
+      return state.filter(todo => todo.id !== action.id);
 
     default:
       return state;

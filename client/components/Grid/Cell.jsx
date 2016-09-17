@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 
-const { string, number, bool, element, oneOfType } = PropTypes;
+const { string, number, bool, node, oneOfType } = PropTypes;
 
-const Cell = ({ text, className, children }, { header }) => {
+const Cell = ({ text, header, className, children }) => {
   if (header === true) {
     return (
       <th className={className}>{text}</th>
@@ -15,13 +15,10 @@ const Cell = ({ text, className, children }, { header }) => {
 };
 
 Cell.propTypes = {
-  className: string,
   text: oneOfType([string, number]),
-  children: element,
-};
-
-Cell.contextTypes = {
-  header: bool,
+  header: bool.isRequired,
+  className: string,
+  children: node,
 };
 
 export default Cell;

@@ -14,13 +14,10 @@ We will produce a boilerplate with 3 way to follow :
 - Use latest package.
 - If you need more, do it.
 
-Warning : if you need isomorphic code (client-side / server-side), move to iso-ying-yang-react package.
-
 # Content
 
 - WebPack 2 with dev/prod configuration, 3-shaking, multiple loaders/plugins (build system).
-- Babel stage-0 + Decorator plugin (for productive code).
-- Core-Decorators (with @autobinding to avoid arrow function/bind on React JSX).
+- Babel stage-0 (for productive code).
 - HMR with React Hot Loader (refresh your component)
 - Perfect CSS support : Autoprefixer + CSS mqPacker + CSS Comb.
 - EsLint (with AirBnB configuration + some presets to enforce good practice).
@@ -116,18 +113,23 @@ The project follow my personal opinion of "good practice" for React :
 - Stateless function please.
 - For the rest, we follow AirBnB JavaScript standard + React plugin rules.
 
+Why we need that ?
+
+- Bloated components and poor data structures are easily spotted.
+- Laziness is dead, you’re forced to think and put state management where it belongs : in higher level container components.
+- You don't need to bind function (in JSX), we use pure function.
+- Easy to understand and test.
+- +++ Performance.
+
+You can change ESLint configuration in ".eslintrc" file.
+
 ### New router ?
 
 React Router v4 doc : https://github.com/ReactTraining/react-router/blob/v4/README.md
 
-### Why are you using Decorators ? Spec can change and break code !
+### Can i use ES7 decorators ?
 
-Decorator are nice shortcut (for example, if you need to enforce context, you can use @autobinding decorator).
-
-If you don't need decorators :
- 
-- Remove "transform-decorators-legacy" in .babelrc file.
-- Remove "babel-transform-decorators-legacy" & "core-decorators" in .package.json file.
+No, spec. can change and we don't need autobinding now, we use pure function.
 
 ### Why Ramda ? We have Underscore or Lodash !
 

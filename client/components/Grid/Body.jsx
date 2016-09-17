@@ -7,7 +7,7 @@ const Body = ({ children }) => (
 );
 
 Body.propTypes = {
-  children: node,
+  children: node.isRequired,
 };
 
 export default Body;

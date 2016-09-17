@@ -11,11 +11,9 @@ function buildRow(fields, row, rowIndex) {
   return (
     <Row key={`row${rowIndex}`}>
       {
-        fields.map(({ mapping, className }, cellIndex) => <Cell
-          text={row[mapping]}
-          className={className}
-          key={`cell${cellIndex}`}
-        />)
+        fields.map(({ mapping, className }, cellIndex) =>
+          <Cell text={row[mapping]} header={false} className={className} key={`cell${cellIndex}`} />
+        )
       }
     </Row>
   );
@@ -37,7 +35,7 @@ export default class Grid extends Component {
       className: string,
     })).isRequired,
     data: arrayOf(objectOf(oneOfType([number, string]))),
-    children: node,
+    children: node.isRequired,
   };
 
   render() {
@@ -48,9 +46,9 @@ export default class Grid extends Component {
         <Header>
           <Row>
             {
-              fields.map(({ name, className }, index) => (
-                <Cell text={name} key={`th${index}`} className={className} />
-              ))
+              fields.map(({ name, className }, index) =>
+                <Cell text={name} header={true} key={`th${index}`} className={className} />
+              )
             }
           </Row>
         </Header>

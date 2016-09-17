@@ -7,7 +7,7 @@ const Row = ({ children }) => (
 );
 
 Row.propTypes = {
-  children: node,
+  children: node.isRequired,
 };
 
 export default Row;
