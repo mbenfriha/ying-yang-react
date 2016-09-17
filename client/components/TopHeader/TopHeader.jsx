@@ -1,7 +1,9 @@
 import React from 'react';
 
-export default () => (
+const TopHeader = () => (
   <header>
     <h1>Budget</h1>
   </header>
 );
+
+export default TopHeader;
