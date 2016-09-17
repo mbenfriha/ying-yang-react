@@ -5,7 +5,7 @@ import Row from './Row';
 import Cell from './Cell';
 import './style.css';
 
-const { string, shape, arrayOf, object, node } = PropTypes;
+const { string, number, shape, arrayOf, objectOf, oneOfType, node } = PropTypes;
 
 function buildRow(fields, row, rowIndex) {
   return (
@@ -36,7 +36,7 @@ export default class Grid extends Component {
       mapping: string,
       className: string,
     })).isRequired,
-    data: arrayOf(object),
+    data: arrayOf(objectOf(oneOfType([number, string]))),
     children: node,
   };
 

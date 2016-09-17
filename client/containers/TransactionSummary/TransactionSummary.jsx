@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Grid from '../../components/Grid';
 
-const { string, shape, arrayOf, object } = PropTypes;
+const { string, number, shape, arrayOf, oneOfType, objectOf } = PropTypes;
 
 export default class TransactionSummary extends Component {
   static propTypes = {
@@ -9,7 +9,7 @@ export default class TransactionSummary extends Component {
       mapping: string,
       className: string
     })).isRequired,
-    data: object,
+    data: objectOf(oneOfType([number, string])),
   };
 
   render() {
