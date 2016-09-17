@@ -8,7 +8,7 @@
 
 React Ying Yang consist on a React boilerplate who can pretend to consume any API and make component testable and re-usable.
 
-We will produce a boilerplate with 3 way :
+We will produce a boilerplate with 3 way to follow :
 
 - Simple and elegant.
 - Use latest package.
@@ -18,17 +18,16 @@ Warning : if you need isomorphic code (client-side / server-side), move to iso-y
 
 # Content
 
-- WebPack 2 with dev/prod configuration, 3-shaking, multiple loaders/plugins.
-- HMR with React Hot Loader.
-- Core-Decorators (with Autobinding).
+- WebPack 2 with dev/prod configuration, 3-shaking, multiple loaders/plugins (build system).
+- Babel stage-0 + Decorator plugin (for productive code).
+- Core-Decorators (with @autobinding to avoid arrow function/bind on React JSX).
+- HMR with React Hot Loader (refresh your component)
 - Perfect CSS support : Autoprefixer + CSS mqPacker + CSS Comb.
+- EsLint (with AirBnB configuration + some presets to enforce good practice).
 - Radium (Inline React Style).
 - Axios (Http Request).
 - Jest & Enzyme (Testing).
 - Selenium Web Driver (E2E).
-- Babel stage-0 + Decorator plugin (for productive code).
-- Flow (Type).
-- EsLint (with AirBnB configuration).
 - Ramda (FP).
 - React with : react-dom, react-router, react-redux.
 - Redux with : redux-form, redux-saga, redux-thunk.
@@ -95,6 +94,8 @@ npm run updates
 ```
 
 # FAQ
+
+### Why i can't use class, this, 
 
 ### New router ?
 

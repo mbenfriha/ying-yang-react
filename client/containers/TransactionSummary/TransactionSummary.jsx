@@ -7,7 +7,7 @@ export default class TransactionSummary extends Component {
   static propTypes = {
     fields: arrayOf(shape({
       mapping: string,
-      className: string
+      className: string,
     })).isRequired,
     data: objectOf(oneOfType([number, string])),
   };

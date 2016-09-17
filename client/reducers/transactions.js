@@ -10,7 +10,7 @@ import {
 import {
   defaultTransactions,
   defaultTransactionGridFields,
-  defaultSummary
+  defaultSummary,
 } from './defaults';
 
 /**
