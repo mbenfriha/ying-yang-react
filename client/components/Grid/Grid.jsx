@@ -48,15 +48,10 @@ export default class Grid extends Component {
         <Header>
           <Row>
             {
-              fields.map(({ name, className }, index) => {
-                return (
-                  <Cell
-                    text={name}
-                    key={`th${index}`}
-                    className={className}
-                  />
-                );
-              })
+              fields.map(({ name, className }, index) => (
+                  <Cell text={name} key={`th${index}`} className={className}/>
+                )
+              )
             }
           </Row>
         </Header>

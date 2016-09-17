@@ -81,9 +81,7 @@ function summary(state = defaultSummary, action) {
 
   switch (action.type) {
     case REQUEST_SUM:
-      sum = action.data.reduce((prev, current) => (
-      { value: prev.value + current.value }
-      ));
+      sum = action.data.reduce((prev, current) => ({ value: prev.value + current.value }));
 
       sum = { value: Math.round(sum.value * 100) / 100 };
 

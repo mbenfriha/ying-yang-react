@@ -34,7 +34,7 @@ class App extends Component {
       <div className="viewport">
         <TopHeader addTodo={actions.addTodo} />
         <Grid fields={gridFields} data={transactions}>
-          <TransactionForm action={actions.addTransaction}/>
+          <TransactionForm action={actions.addTransaction} />
           <TransactionSummary data={summary} fields={gridFields} />
         </Grid>
       </div>
