@@ -17,7 +17,7 @@ We will produce a boilerplate with 3 way to follow :
 # Content
 
 - WebPack 2 with dev/prod configuration, 3-shaking, multiple loaders/plugins (build system).
-- Babel stage-0 (for productive code).
+- Babel stage-2 (for productive code).
 - HMR with React Hot Loader (refresh your component)
 - Perfect CSS support : Autoprefixer + CSS mqPacker + CSS Comb.
 - EsLint (with AirBnB configuration + some presets to enforce good practice).
@@ -130,6 +130,12 @@ React Router v4 doc : https://github.com/ReactTraining/react-router/blob/v4/READ
 ### Can i use ES7 decorators ?
 
 No, spec. can change and we don't need autobinding now, we use pure function.
+
+### Can i move to Babel stage-0 ?
+
+If you need to change stage, just change the "package.json" to right stage and run "npm update".
+
+Then, edit ".babelrc" to change stage.
 
 ### Why Ramda ? We have Underscore or Lodash !
 

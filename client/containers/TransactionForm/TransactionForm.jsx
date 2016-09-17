@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { autobind } from 'core-decorators';
 
 import Grid from '../../components/Grid';
 
@@ -8,7 +7,6 @@ export default class TransactionForm extends Component {
     action: PropTypes.func,
   };
 
-  @autobind()
   onFieldKeyUp(e) {
     if (e.keyCode === 13) {
       this.submitForm();
