@@ -2,6 +2,7 @@
 
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
+const WebpackBrowserPlugin = require('webpack-browser-plugin');
 const DashboardPlugin = require('webpack-dashboard/plugin');
 const provider = require('./providers');
 const { port, baseUrl, extraGlobalPlugins } = require('./providers/config');
@@ -20,7 +21,8 @@ provider.plugins.push(
   ),
   new webpack.NoErrorsPlugin(),
   new webpack.HotModuleReplacementPlugin(),
-  new DashboardPlugin()
+  new DashboardPlugin(),
+  new WebpackBrowserPlugin({ url: 'http://localhost', port })
 );
 
 provideServer(provider);
