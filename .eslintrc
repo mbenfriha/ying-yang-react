@@ -1,52 +1,49 @@
-root:
-  true
-
-extends:
-  airbnb
-
-parser:
-  babel-eslint
-
-settings:
-  ecmascript: 6
-
-ecmaFeatures:
-  jsx: true
-  modules: true
-  destructuring: true
-  classes: true
-  forOf: true
-  blockBindings: true
-  arrowFunctions: true
-
-env:
-  browser: true
-
-rules:
-  indent: 2
-  fp/no-arguments: 2
-  fp/no-class: 2
-  fp/no-delete: 2
-  fp/no-events: 2
-  fp/no-get-set: 2
-  fp/no-let: 2
-  fp/no-loops: 2
-  fp/no-mutating-assign: 2
-  fp/no-mutating-methods: 2
-  fp/no-mutation: 2
-  fp/no-nil: 2
-  fp/no-proxy: 2
-  fp/no-rest-parameters: 2
-  fp/no-this: 2
-  fp/no-throw: 2
-  fp/no-unused-expression: 2
-  fp/no-valueof-field: 2
-  no-var: 2
-  no-console: 0
-  import/no-named-as-default: 0
-  react/no-string-refs: 0
-  react/require-extension: off
-
-plugins:
-- react
-- fp
+{
+  "root": true,
+  "extends": "airbnb",
+  "parser": "babel-eslint",
+  "settings": {
+    "ecmascript": 6
+  },
+  "ecmaFeatures": {
+    "jsx": true,
+    "modules": true,
+    "destructuring": true,
+    "classes": true,
+    "forOf": true,
+    "blockBindings": true,
+    "arrowFunctions": true
+  },
+  "env": {
+    "browser": true
+  },
+  "rules": {
+    "indent": 2,
+    "fp/no-arguments": 2,
+    "fp/no-class": 2,
+    "fp/no-delete": 2,
+    "fp/no-events": 2,
+    "fp/no-get-set": 2,
+    "fp/no-let": 2,
+    "fp/no-loops": 2,
+    "fp/no-mutating-assign": 2,
+    "fp/no-mutating-methods": 2,
+    "fp/no-mutation": [2, { "commonjs": true, "exceptions": [{ "property": "propTypes" }]}],
+    "fp/no-nil": 2,
+    "fp/no-proxy": 2,
+    "fp/no-rest-parameters": 2,
+    "fp/no-this": 2,
+    "fp/no-throw": 2,
+    "fp/no-unused-expression": 2,
+    "fp/no-valueof-field": 2,
+    "no-var": 2,
+    "no-console": 0,
+    "import/no-named-as-default": 0,
+    "react/no-string-refs": 0,
+    "react/require-extension": "off"
+  },
+  "plugins": [
+    "react",
+    "fp"
+  ]
+}
