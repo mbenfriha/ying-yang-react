@@ -103,8 +103,8 @@ React Router v4 doc : https://github.com/ReactTraining/react-router/blob/v4/READ
 
 If you don't need decorators :
  
-- Remove "transform-decorators" in .babelrc file.
-- Remove "babel-transform-decorators" in .package.json file.
+- Remove "transform-decorators-legacy" in .babelrc file.
+- Remove "babel-transform-decorators-legacy" & "core-decorators" in .package.json file.
 
 ### Why Ramda ? We have Underscore or Lodash !
 
