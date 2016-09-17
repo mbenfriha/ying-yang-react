@@ -41,7 +41,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loaders: ['css', 'postcss'],
+        loaders: ['css', 'postcss', 'csscomb'],
       },
       {
         test: /\.json$/,
