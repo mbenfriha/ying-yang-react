@@ -18,10 +18,11 @@ Warning : if you need isomorphic code (client-side / server-side), move to iso-y
 
 # Content
 
-- WebPack 2 with dev/prod configuration, 3-shaking, multiple loader/plugins.
+- WebPack 2 with dev/prod configuration, 3-shaking, multiple loaders/plugins.
 - HMR with React Hot Loader.
 - Core-Decorators (with Autobinding).
 - Perfect CSS support : Autoprefixer + CSS mqPacker + CSS Comb.
+- Radium (Inline React Style).
 - Axios (Http Request).
 - Jest & Enzyme (Testing).
 - Selenium Web Driver (E2E).
