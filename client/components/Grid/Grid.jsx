@@ -11,9 +11,9 @@ function buildRow(fields, row, rowIndex) {
   return (
     <Row key={`row${rowIndex}`}>
       {
-        fields.map((field, cellIndex) => <Cell
-          text={row[field.mapping]}
-          className={field.className}
+        fields.map(({ mapping, className }, cellIndex) => <Cell
+          text={row[mapping]}
+          className={className}
           key={`cell${cellIndex}`}
         />)
       }

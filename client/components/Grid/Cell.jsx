@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-const { string, bool, element } = PropTypes;
+const { string, number, bool, element, oneOfType } = PropTypes;
 
 const Cell = ({ text, className, children }, { header }) => {
   if (header === true) {
@@ -15,9 +15,8 @@ const Cell = ({ text, className, children }, { header }) => {
 };
 
 Cell.propTypes = {
-  key: string,
   className: string,
-  text: string,
+  text: oneOfType([string, number]),
   children: element,
 };
 

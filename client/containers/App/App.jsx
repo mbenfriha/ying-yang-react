@@ -8,35 +8,44 @@ import TransactionForm from '../TransactionForm/TransactionForm';
 import TransactionSummary from '../TransactionSummary/TransactionSummary';
 import * as AppActions from '../../actions';
 
-const { array, object } = PropTypes;
+const { arrayOf, shape, number, string, func } = PropTypes;
 
 class App extends Component {
   static propTypes = {
-    transactions: array,
-    summary: object,
-    gridFields: array,
-    actions: object,
+    transactions: arrayOf(shape({
+      id: number.isRequired,
+      description: string.isRequired,
+      value: number.isRequired,
+    })),
+    summary: shape({
+      description: string.isRequired,
+    }),
+    gridFields: arrayOf(shape({
+      name: string.isRequired,
+      className: string.isRequired,
+      mapping: string.isRequired,
+    })),
+    actions: shape({
+      requestSum: func.isRequired,
+      addTransaction: func.isRequired,
+    }),
   };
 
   componentWillMount() {
-    const { transactions, actions } = this.props;
+    const { transactions, actions: { requestSum } } = this.props;
 
-    actions.requestSum(transactions);
+    requestSum(transactions);
   }
 
   render() {
-    const {
-      transactions,
-      gridFields,
-      summary,
-      actions,
-    } = this.props;
+    const { transactions, gridFields, summary, actions } = this.props;
+    const { addTransaction } = actions;
 
     return (
       <div className="viewport">
-        <TopHeader addTodo={actions.addTodo} />
+        <TopHeader />
         <Grid fields={gridFields} data={transactions}>
-          <TransactionForm action={actions.addTransaction} />
+          <TransactionForm action={addTransaction} />
           <TransactionSummary data={summary} fields={gridFields} />
         </Grid>
       </div>
@@ -45,12 +54,12 @@ class App extends Component {
 }
 
 function mapStateToProps(state) {
-  const { transactions } = state;
+  const { transactions: { transactions, summary, transactionsGrid: gridFields } } = state;
 
   return {
-    transactions: transactions.transactions,
-    summary: transactions.summary,
-    gridFields: transactions.transactionsGrid,
+    transactions,
+    summary,
+    gridFields,
   };
 }
 
