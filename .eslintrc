@@ -6,13 +6,25 @@
     "ecmascript": 6
   },
   "ecmaFeatures": {
-    "jsx": true,
-    "modules": true,
-    "destructuring": true,
-    "classes": true,
-    "forOf": true,
-    "blockBindings": true,
     "arrowFunctions": true
+    "binaryLiterals": false,
+    "blockBindings": true,
+    "classes": false,
+    "defaultParams": true,
+    "destructuring": true,
+    "forOf": false,
+    "generators": true,
+    "modules": true,
+    "objectLiteralComputedProperties": true,
+    "objectLiteralDuplicateProperties": false,
+    "objectLiteralShorthandMethods": true,
+    "objectLiteralShorthandProperties": true,
+    "octalLiterals": false,
+    "regexUFlag": false,
+    "regexYFlag": false,
+    "templateStrings": true,
+    "unicodeCodePointEscapes": false,
+    "jsx": true
   },
   "env": {
     "browser": true
