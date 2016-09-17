@@ -8,12 +8,14 @@ import TransactionForm from '../TransactionForm/TransactionForm';
 import TransactionSummary from '../TransactionSummary/TransactionSummary';
 import * as AppActions from '../../actions';
 
+const { array, object } = PropTypes;
+
 class App extends Component {
   static propTypes = {
-    transactions: PropTypes.array,
-    summary: PropTypes.object,
-    gridFields: PropTypes.array,
-    actions: PropTypes.object,
+    transactions: array,
+    summary: object,
+    gridFields: array,
+    actions: object,
   };
 
   componentWillMount() {

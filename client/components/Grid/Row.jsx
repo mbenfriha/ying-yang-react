@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
-export default ({ children }) => {
-  return (
-    <tr>{children}</tr>
-  );
+const { element } = PropTypes;
+
+const Row = ({ children }) => (
+  <tr>{children}</tr>
+);
+
+Row.propTypes = {
+  children: element,
 };
+
+export default Row;

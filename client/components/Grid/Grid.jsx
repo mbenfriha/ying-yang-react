@@ -34,10 +34,10 @@ export default class Grid extends Component {
     fields: arrayOf(shape({
       name: string,
       mapping: string,
-      className: string
+      className: string,
     })).isRequired,
     data: arrayOf(object),
-    children: node
+    children: node,
   };
 
   render() {
@@ -49,9 +49,8 @@ export default class Grid extends Component {
           <Row>
             {
               fields.map(({ name, className }, index) => (
-                  <Cell text={name} key={`th${index}`} className={className}/>
-                )
-              )
+                <Cell text={name} key={`th${index}`} className={className} />
+              ))
             }
           </Row>
         </Header>

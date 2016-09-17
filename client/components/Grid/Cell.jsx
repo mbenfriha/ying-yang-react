@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react';
 
+const { string, bool, element } = PropTypes;
+
 const Cell = ({ text, className, children }, { header }) => {
   if (header === true) {
     return (
@@ -12,8 +14,15 @@ const Cell = ({ text, className, children }, { header }) => {
   );
 };
 
+Cell.propTypes = {
+  key: string,
+  className: string,
+  text: string,
+  children: element,
+};
+
 Cell.contextTypes = {
-  header: PropTypes.bool,
+  header: bool,
 };
 
 export default Cell;

@@ -3,7 +3,7 @@
 module.exports = {
   entry: {
     vendor: ['./client/vendor.js'],
-    app: ['./client/index.js', './client/critical.css'],
+    app: ['./client/index.jsx', './client/critical.css'],
   },
   port: 3000,
   baseUrl: '/',

@@ -20,13 +20,12 @@ export default class TransactionSummary extends Component {
         <Grid.Row>
           {
             fields.map(({ mapping, className }, index) => (
-                <Grid.Cell
-                  text={data[mapping]}
-                  className={className}
-                  key={`tf${index}`}
-                />
-              )
-            )
+              <Grid.Cell
+                text={data[mapping]}
+                className={className}
+                key={`tf${index}`}
+              />
+            ))
           }
         </Grid.Row>
       </Grid.Footer>

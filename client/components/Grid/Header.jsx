@@ -1,12 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 
+const { node, bool } = PropTypes;
+
 export default class Header extends Component {
   static propTypes = {
-    children: PropTypes.node.isRequired,
+    children: node.isRequired,
   };
 
   static childContextTypes = {
-    header: PropTypes.bool,
+    header: bool,
   };
 
   getChildContext() {

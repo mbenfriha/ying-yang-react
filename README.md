@@ -20,6 +20,7 @@ Warning : if you need isomorphic code (client-side / server-side), move to iso-y
 
 - WebPack 2 with dev/prod configuration, 3-shaking, multiple loader/plugins.
 - HMR with React Hot Loader.
+- Core-Decorators (with Autobinding).
 - Perfect CSS support : Autoprefixer + CSS mqPacker + CSS Comb.
 - Axios (Http Request).
 - Jest & Enzyme (Testing).

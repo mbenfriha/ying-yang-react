@@ -1,5 +1,13 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
-export default ({ children }) => (
+const { element } = PropTypes;
+
+const Footer = ({ children }) => (
   <tfoot>{children}</tfoot>
 );
+
+Footer.propTypes = {
+  children: element,
+};
+
+export default Footer;

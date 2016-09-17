@@ -1,4 +1,6 @@
 import React, { Component, PropTypes } from 'react';
+import { autobind } from 'core-decorators';
+
 import Grid from '../../components/Grid';
 
 export default class TransactionForm extends Component {
@@ -6,6 +8,7 @@ export default class TransactionForm extends Component {
     action: PropTypes.func,
   };
 
+  @autobind()
   onFieldKeyUp(e) {
     if (e.keyCode === 13) {
       this.submitForm();
@@ -39,7 +42,7 @@ export default class TransactionForm extends Component {
               name="description"
               placeholder="Description"
               ref="descField"
-              onKeyUp={::this.onFieldKeyUp}
+              onKeyUp={this.onFieldKeyUp}
             />
           </Grid.Cell>
           <Grid.Cell>
@@ -47,7 +50,7 @@ export default class TransactionForm extends Component {
               name="value"
               placeholder="Value"
               ref="valueField"
-              onKeyUp={::this.onFieldKeyUp}
+              onKeyUp={this.onFieldKeyUp}
               type="number"
               step="any"
             />

@@ -1,5 +1,13 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
-export default ({ children }) => (
+const { element } = PropTypes;
+
+const Body = ({ children }) => (
   <tbody>{children}</tbody>
 );
+
+Body.propTypes = {
+  children: element,
+};
+
+export default Body;
