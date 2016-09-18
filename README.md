@@ -98,9 +98,9 @@ The project follow my personal opinion of "good practice" for React :
 
 - 2x indent space.
 - Don't use of : arguments, class, delete, events, getter, setter, let, var loops, statement.
-- 0 mutations.
+- Avoid mutations (except for component props declaration).
 - No var/let, only const.
-- Never use this.
+- Don't use this.
 - Don't use null or undefined.
 - Don't use ES6 Proxy. 
 - Don't use rest parameters.
@@ -119,7 +119,7 @@ Why we need that ?
 - Laziness is dead, you’re forced to think and put state management where it belongs : in higher level container components.
 - You don't need to bind function (in JSX), we use pure function.
 - Easy to understand and test.
-- +++ Performance.
+- Performance (in future).
 
 You can change ESLint configuration in ".eslintrc" file.
 
@@ -129,13 +129,17 @@ React Router v4 doc : https://github.com/ReactTraining/react-router/blob/v4/READ
 
 ### Can i use ES7 decorators ?
 
-No, spec. can change and we don't need autobinding now, we use pure function.
+No, spec. can change and we try to use pure function to prevent context binding.
+
+If you need it, use it.
 
 ### Can i move to Babel stage-0 ?
 
-If you need to change stage, just change the "package.json" to right stage and run "npm update".
+Stage-0 can be useful for mass export or if you want latest ECMAScript power.
 
-Then, edit ".babelrc" to change stage.
+If you want to change stage, remove the old stage in "package.json" and install new stage.
+
+Then, edit ".babelrc" file.
 
 ### Why Ramda ? We have Underscore or Lodash !
 
