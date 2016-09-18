@@ -20,8 +20,14 @@ provider.plugins.push(
       extraGlobalPlugins
     )
   ),
+  new webpack.optimize.CommonsChunkPlugin({
+    name: 'vendor',
+    minChunks: Infinity,
+    filename: 'vendor.[chunkhash:8].js'
+  }),
   new webpack.LoaderOptionsPlugin({
     minimize: true,
+    debug: false,
   }),
   new webpack.optimize.UglifyJsPlugin({
     compress: {
