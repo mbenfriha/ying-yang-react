@@ -27,7 +27,7 @@ We will produce a boilerplate with 3 way to follow :
 - Selenium Web Driver (E2E).
 - Ramda (FP).
 - React with : react-dom, react-router, react-redux.
-- Redux with : redux-form, redux-saga, redux-thunk.
+- Redux with : redux-form, redux-thunk.
 - Support for Redux DevTools : https://github.com/zalmoxisus/redux-devtools-extension
 
 # Install

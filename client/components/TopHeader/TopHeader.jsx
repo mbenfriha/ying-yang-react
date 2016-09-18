@@ -2,7 +2,7 @@ import React from 'react';
 
 const TopHeader = () => (
   <header>
-    <h1>Budget</h1>
+    <h1>Ying Yang</h1>
   </header>
 );
 
