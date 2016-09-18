@@ -1,15 +1,14 @@
 import React, { PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { ifElse, anyPass, propSatisfies, curry, F } from 'ramda';
+import { ifElse, anyPass, propSatisfies, curry, equals, isEmpty, isNil, F } from 'ramda';
 
 const { func } = PropTypes;
 
 const submitForm = action =>
   ifElse(
     anyPass([
-      propSatisfies(x => x.length === 0, 'description'),
-      propSatisfies(x => x === 0, 'value'),
-      propSatisfies(isNaN, 'value'),
+      propSatisfies(anyPass([isNil, isEmpty]), 'description'),
+      propSatisfies(anyPass([isNil, isNaN, equals(0)]), 'value'),
     ]),
     F,
     curry(action),
