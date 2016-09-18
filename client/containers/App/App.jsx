@@ -1,4 +1,4 @@
-import React, { componentWillMount, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
@@ -17,9 +17,9 @@ const App = ({ transactions, gridFields, summary, actions }) => {
     <div className="viewport">
       <TopHeader />
       <Grid fields={gridFields} data={transactions}>
-        <TransactionForm action={addTransaction} />
         <TransactionSummary data={summary} fields={gridFields} />
       </Grid>
+      <TransactionForm action={addTransaction} />
     </div>
   );
 };
