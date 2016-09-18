@@ -83,7 +83,6 @@
     "no-console": 0,
     "new-cap": 0,
     "import/no-named-as-default": 0,
-    "react/no-string-refs": 0,
     "react/require-extension": "off"
   },
   "plugins": [
