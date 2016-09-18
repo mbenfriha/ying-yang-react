@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Field, reduxForm, propTypes } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 
 const { func } = PropTypes;
 
@@ -23,7 +23,7 @@ const TransactionForm = reduxForm({ form: 'TRANSACTION_FORM' })(({ action, handl
 
 TransactionForm.propTypes = {
   action: func,
-  ...propTypes,
+  handleSubmit: func,
 };
 
 export default TransactionForm;
