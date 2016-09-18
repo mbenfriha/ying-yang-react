@@ -92,13 +92,23 @@ npm run updates
 
 # FAQ
 
+### Why i need this ?
+
+Boilerplate are opiniated and they have ton of possibility.
+
+You need Ying Yang React if you want to make fast project with simple configuration.
+
+If you disallow regular object-oriented programing with class and want to use more functional and pure functions, you're in right place.
+
+Otherwise, you may probably need to use regular React boilerplate or make your one.
+
 ### I can't use class and this, what the hell ?
 
-The project follow my personal opinion of "good practice" for React :
+The project follow hard rules to enforce good practice for more functional project :
 
 - 2x indent space.
-- Don't use of : arguments, class, delete, events, getter, setter, let, var loops, statement.
-- Avoid mutations (except for component props declaration).
+- Don't use of : arguments, class, delete, events, getter, setter, let, var, loops, statement.
+- Avoid mutations (except for component props declaration like componentWillMount or propTypes).
 - No var/let, only const.
 - Don't use this.
 - Don't use null or undefined.
@@ -109,15 +119,16 @@ The project follow my personal opinion of "good practice" for React :
 - You can use "console" object (but don't forget to disable this rule before production).
 - Default ES6 import without name permitted for merging component.
 - Write component as function, forget React.createClass or React.Component.
-- You can use strings refs in component. (this rule will be removed soon).
 - Stateless function please.
-- For the rest, we follow AirBnB JavaScript standard + React plugin rules.
+- No React string refs.
+- Function with new cap without constructor are authorized (like Ramda F()).
+- For the rest, we follow AirBnB JavaScript standard + React plugin rules, classic.
 
 Why we need that ?
 
 - Bloated components and poor data structures are easily spotted.
 - Laziness is dead, you’re forced to think and put state management where it belongs : in higher level container components.
-- You don't need to bind function (in JSX), we use pure function.
+- You may rarely need binding function (in JSX), we try to use pure function.
 - Easy to understand and test.
 - Performance (in future).
 
@@ -145,13 +156,19 @@ Then, edit ".babelrc" file.
 
 Ramda has a more focused goal.
 
-Ramda use pattern like iterable, transducer.
+Ramda use pattern like iterable, transducer, curry.
+
+Ramda can implement Fantasy Land algebraic data-structure if needed (https://github.com/fantasyland/fantasy-land).
 
 Ramda is designed specifically for a functional programming style, one that makes it easy to create functional pipelines, one that never mutates user data.
 
 Ramda can work with React very well.
 
 Doc : http://ramdajs.com/0.22.1/docs/
+
+### Can i use Immutable.js ?
+
+Yes, with immutable PropTypes, that will be good : https://www.npmjs.com/package/react-immutable-proptypes
 
 ### How i can add vendor in my project ?
 
