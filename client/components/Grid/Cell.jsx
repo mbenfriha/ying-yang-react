@@ -16,7 +16,7 @@ const Cell = ({ text, header, className, children }) => {
 
 Cell.propTypes = {
   text: oneOfType([string, number]),
-  header: bool.isRequired,
+  header: bool,
   className: string,
   children: node,
 };
