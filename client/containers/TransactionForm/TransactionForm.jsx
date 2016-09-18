@@ -17,7 +17,7 @@ const submitForm = action =>
 
 const TransactionForm = reduxForm({ form: 'TRANSACTION_FORM' })(({ action, handleSubmit }) =>
   <div>
-    <form onSubmit={handleSubmit(fields => submitForm(action)(fields))}>
+    <form onSubmit={handleSubmit(submitForm(action))}>
       <Field name="description" placeholder="Description" component="input" />
       <Field name="value" placeholder="Value" component="input" type="number" step="any" />
       <button type="submit">Submit</button>
