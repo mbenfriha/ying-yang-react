@@ -38,7 +38,6 @@
     "fp/no-get-set": 2,
     "fp/no-let": 2,
     "fp/no-loops": 2,
-    "fp/no-mutating-assign": 2,
     "fp/no-mutating-methods": 2,
     "fp/no-mutation": [2,
       {
@@ -79,10 +78,10 @@
     "fp/no-rest-parameters": 2,
     "fp/no-this": 2,
     "fp/no-throw": 2,
-    "fp/no-unused-expression": 2,
     "fp/no-valueof-field": 2,
     "no-var": 2,
     "no-console": 0,
+    "new-cap": 0,
     "import/no-named-as-default": 0,
     "react/no-string-refs": 0,
     "react/require-extension": "off"
