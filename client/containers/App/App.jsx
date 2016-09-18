@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import functional from 'react-functional';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
@@ -65,4 +66,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(App);
+)(functional(App));

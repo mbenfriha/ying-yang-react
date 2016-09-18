@@ -23,8 +23,8 @@ We will produce a boilerplate with 3 way to follow :
 - EsLint (with AirBnB configuration + some presets to enforce good practice).
 - Radium (Inline React Style).
 - Axios (Http Request).
-- Jest & Enzyme (Testing).
-- Selenium Web Driver (E2E).
+- Jest & Enzyme (Testing) [IN PROGRESS]
+- Selenium Web Driver (E2E) [IN PROGRESS]
 - Ramda (FP).
 - React with : react-dom, react-router, react-redux, react-functional.
 - Redux with : redux-form, redux-thunk.
@@ -109,7 +109,7 @@ The project follow hard rules to enforce good practice for more functional proje
 - 2x indent space.
 - Comma-dangle in function arguments and Array / Object literal (if they're split into multiple line).
 - Don't use of : arguments, class, delete, events, getter, setter, let, var, loops, statement.
-- Avoid mutations (except for component props declaration like componentWillMount or propTypes).
+- Avoid mutations.
 - No var/let, only const.
 - Don't use this.
 - Don't use null or undefined.
@@ -134,6 +134,46 @@ Why we need that ?
 - Performance (in future).
 
 You can change ESLint configuration in ".eslintrc" file.
+
+### How i can add PropTypes or lifecycle hook ?
+
+With "react-functional", function support lifecycle hook.
+
+Add life cycle methods to stateless functional components, without the class noise.
+
+```js
+import { React } from 'react'
+import functional from 'react-functional'
+
+const ComponentA = props => (
+  <div>{ props.name }</div>
+);
+
+ComponentA.shouldComponentUpdate = (props, nextProps) =>
+    props.name !== nextProps.name
+
+export default functional(ComponentA);
+```
+
+You may notice we mutate Component A : we authorize mutation to add React lifecycle hook and propTypes/defaultProps.
+
+We can use more pure solution :
+
+```js
+import { React } from 'react'
+import functional from 'react-functional'
+
+const ComponentA = props => (
+  <div>{ props.name }</div>
+);
+
+const hook = {
+  shouldComponentUpdate: (props, nextProps) =>
+       props.name !== nextProps.name
+};
+
+export default functional(ComponentA, hook);
+```
 
 ### New router ?
 
