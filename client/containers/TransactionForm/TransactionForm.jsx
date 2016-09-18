@@ -4,7 +4,7 @@ import { ifElse, anyPass, propSatisfies, curry, F } from 'ramda';
 
 const { func } = PropTypes;
 
-const submitForm = (action) =>
+const submitForm = action =>
   ifElse(
     anyPass([
       propSatisfies(x => x.length === 0, 'description'),
