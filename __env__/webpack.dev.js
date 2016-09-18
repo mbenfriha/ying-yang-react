@@ -39,7 +39,7 @@ listen(new WebpackDevServer(webpack(provider), {
   hot: true,
   historyApiFallback: true,
   compress: true,
-  quiet: false,
+  quiet: true,
   noInfo: false,
   stats: { colors: true },
   publicPath: provider.output.publicPath,
