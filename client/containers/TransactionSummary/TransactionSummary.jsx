@@ -19,13 +19,9 @@ export default class TransactionSummary extends Component {
       <Grid.Footer>
         <Grid.Row>
           {
-            fields.map(({ mapping, className }, index) => (
-              <Grid.Cell
-                text={data[mapping]}
-                className={className}
-                key={`tf${index}`}
-              />
-            ))
+            fields.map(({ mapping, className }, index) =>
+              <Grid.Cell text={data[mapping]} className={className} key={`tf${index}`} header={false} />
+            )
           }
         </Grid.Row>
       </Grid.Footer>
