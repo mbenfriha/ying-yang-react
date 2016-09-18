@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { ifElse, anyPass, propSatisfies, F } from 'ramda';
+import { ifElse, anyPass, propSatisfies, curry, F } from 'ramda';
 
 const { func } = PropTypes;
 
@@ -12,7 +12,7 @@ const submitForm = ({ value, description }, action) =>
       propSatisfies(isNaN, 'value'),
     ]),
     F,
-    () => action({ value, description }),
+    curry(action),
   )({ value, description });
 
 const TransactionForm = reduxForm({ form: 'TRANSACTION_FORM' })(({ action, handleSubmit }) =>
