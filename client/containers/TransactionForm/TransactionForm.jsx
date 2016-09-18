@@ -1,60 +1,29 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
+import { Field, reduxForm, propTypes } from 'redux-form';
 
-import Grid from '../../components/Grid';
+const { func } = PropTypes;
 
-export default class TransactionForm extends Component {
-  static propTypes = {
-    action: PropTypes.func,
-  };
-
-  onFieldKeyUp(e) {
-    if (e.keyCode === 13) {
-      this.submitForm();
-    }
+const submitForm = ({ value, description }, action) => {
+  if (value === 0 || isNaN(value) || description.length === 0) {
+    return;
   }
 
-  submitForm() {
-    const { valueField, descField } = this.refs;
-    const { action } = this.props;
+  action({ value, description });
+};
 
-    const value = parseFloat(valueField.value);
-    const description = descField.value;
+const TransactionForm = reduxForm({ form: 'TRANSACTION_FORM' })(({ action, handleSubmit }) =>
+  <div>
+    <form onSubmit={handleSubmit(fields => submitForm(fields, action))}>
+      <Field name="description" placeholder="Description" component="input" />
+      <Field name="value" placeholder="Value" component="input" type="number" step="any" />
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+);
 
-    if (value === 0 || isNaN(value) || description.length === 0) {
-      return;
-    }
+TransactionForm.propTypes = {
+  action: func,
+  ...propTypes,
+};
 
-    action({ value, description });
-
-    valueField.value = descField.value = '';
-
-    descField.focus();
-  }
-
-  render() {
-    return (
-      <Grid.Footer>
-        <Grid.Row>
-          <Grid.Cell header={false}>
-            <input
-              name="description"
-              placeholder="Description"
-              ref="descField"
-              onKeyUp={this.onFieldKeyUp}
-            />
-          </Grid.Cell>
-          <Grid.Cell header={false}>
-            <input
-              name="value"
-              placeholder="Value"
-              ref="valueField"
-              onKeyUp={this.onFieldKeyUp}
-              type="number"
-              step="any"
-            />
-          </Grid.Cell>
-        </Grid.Row>
-      </Grid.Footer>
-    );
-  }
-}
+export default TransactionForm;
