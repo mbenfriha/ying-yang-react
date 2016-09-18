@@ -107,6 +107,7 @@ Otherwise, you may probably need to use regular React boilerplate or make your o
 The project follow hard rules to enforce good practice for more functional project :
 
 - 2x indent space.
+- Comma-dangle in function arguments and Array / Object literal (if they're split into multiple line).
 - Don't use of : arguments, class, delete, events, getter, setter, let, var, loops, statement.
 - Avoid mutations (except for component props declaration like componentWillMount or propTypes).
 - No var/let, only const.
