@@ -98,7 +98,7 @@ Boilerplate are opiniated and they have ton of possibility.
 
 You need Ying Yang React if you want to make fast project with simple configuration.
 
-If you disallow regular object-oriented programing with class and want to use more functional and pure functions, you're in right place.
+If you disallow regular object-oriented programming with class and want to use more functional and pure functions, you're in right place.
 
 Otherwise, you may probably need to use regular React boilerplate or make your one.
 
