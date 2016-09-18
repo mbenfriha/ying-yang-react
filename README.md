@@ -26,7 +26,7 @@ We will produce a boilerplate with 3 way to follow :
 - Jest & Enzyme (Testing).
 - Selenium Web Driver (E2E).
 - Ramda (FP).
-- React with : react-dom, react-router, react-redux.
+- React with : react-dom, react-router, react-redux, react-functional.
 - Redux with : redux-form, redux-thunk.
 - Support for Redux DevTools : https://github.com/zalmoxisus/redux-devtools-extension
 
