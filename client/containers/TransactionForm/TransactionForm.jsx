@@ -4,7 +4,7 @@ import { ifElse, anyPass, propSatisfies, curry, F } from 'ramda';
 
 const { func } = PropTypes;
 
-const submitForm = ({ value, description }, action) =>
+const submitForm = (action) =>
   ifElse(
     anyPass([
       propSatisfies(x => x.length === 0, 'description'),
@@ -13,11 +13,11 @@ const submitForm = ({ value, description }, action) =>
     ]),
     F,
     curry(action),
-  )({ value, description });
+  );
 
 const TransactionForm = reduxForm({ form: 'TRANSACTION_FORM' })(({ action, handleSubmit }) =>
   <div>
-    <form onSubmit={handleSubmit(fields => submitForm(fields, action))}>
+    <form onSubmit={handleSubmit(fields => submitForm(action)(fields))}>
       <Field name="description" placeholder="Description" component="input" />
       <Field name="value" placeholder="Value" component="input" type="number" step="any" />
       <button type="submit">Submit</button>
