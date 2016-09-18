@@ -40,7 +40,40 @@
     "fp/no-loops": 2,
     "fp/no-mutating-assign": 2,
     "fp/no-mutating-methods": 2,
-    "fp/no-mutation": [2, { "commonjs": true, "exceptions": [{ "property": "propTypes" }]}],
+    "fp/no-mutation": [2,
+      {
+        "commonjs": true,
+        "exceptions": [
+          {
+            "property": "propTypes"
+          },
+          {
+            "property": "defaultProps"
+          },
+          {
+            "property": "componentWillMount"
+          },
+          {
+            "property": "componentDidMount"
+          },
+          {
+            "property": "componentWillReceiveProps"
+          },
+          {
+            "property": "shouldComponentUpdate"
+          },
+          {
+            "property": "componentWillUpdate"
+          },
+          {
+            "property": "componentDidUpdate"
+          },
+          {
+            "property": "componentWillUnmount"
+          }
+        ]
+      }
+    ],
     "fp/no-nil": 2,
     "fp/no-proxy": 2,
     "fp/no-rest-parameters": 2,
