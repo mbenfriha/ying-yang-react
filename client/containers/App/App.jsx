@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { componentWillMount, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
@@ -10,48 +10,41 @@ import * as AppActions from '../../actions';
 
 const { arrayOf, shape, number, string, func } = PropTypes;
 
-class App extends Component {
-  static propTypes = {
-    transactions: arrayOf(shape({
-      id: number.isRequired,
-      description: string.isRequired,
-      value: number.isRequired,
-    })),
-    summary: shape({
-      description: string.isRequired,
-    }),
-    gridFields: arrayOf(shape({
-      name: string.isRequired,
-      className: string.isRequired,
-      mapping: string.isRequired,
-    })),
-    actions: shape({
-      requestSum: func.isRequired,
-      addTransaction: func.isRequired,
-    }),
-  };
+const App = ({ transactions, gridFields, summary, actions }) => {
+  const { addTransaction } = actions;
 
-  componentWillMount() {
-    const { transactions, actions: { requestSum } } = this.props;
+  return (
+    <div className="viewport">
+      <TopHeader />
+      <Grid fields={gridFields} data={transactions}>
+        <TransactionForm action={addTransaction} />
+        <TransactionSummary data={summary} fields={gridFields} />
+      </Grid>
+    </div>
+  );
+};
 
-    requestSum(transactions);
-  }
+App.componentWillMount = (({ transactions, actions: { requestSum } }) => requestSum(transactions));
 
-  render() {
-    const { transactions, gridFields, summary, actions } = this.props;
-    const { addTransaction } = actions;
-
-    return (
-      <div className="viewport">
-        <TopHeader />
-        <Grid fields={gridFields} data={transactions}>
-          <TransactionForm action={addTransaction} />
-          <TransactionSummary data={summary} fields={gridFields} />
-        </Grid>
-      </div>
-    );
-  }
-}
+App.propTypes = {
+  transactions: arrayOf(shape({
+    id: number.isRequired,
+    description: string.isRequired,
+    value: number.isRequired,
+  })),
+  summary: shape({
+    description: string.isRequired,
+  }),
+  gridFields: arrayOf(shape({
+    name: string.isRequired,
+    className: string.isRequired,
+    mapping: string.isRequired,
+  })),
+  actions: shape({
+    requestSum: func.isRequired,
+    addTransaction: func.isRequired,
+  }).isRequired,
+};
 
 function mapStateToProps(state) {
   const { transactions: { transactions, summary, transactionsGrid: gridFields } } = state;
@@ -71,5 +64,5 @@ function mapDispatchToProps(dispatch) {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(App);
