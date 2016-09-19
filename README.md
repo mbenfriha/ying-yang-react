@@ -142,15 +142,14 @@ With "react-functional", function support lifecycle hook.
 Add life cycle methods to stateless functional components, without the class noise.
 
 ```js
-import { React } from 'react'
-import functional from 'react-functional'
+import { React } from 'react';
+import functional from 'react-functional';
 
 const ComponentA = props => (
   <div>{ props.name }</div>
 );
 
-ComponentA.shouldComponentUpdate = (props, nextProps) =>
-    props.name !== nextProps.name
+ComponentA.shouldComponentUpdate = (props, nextProps) => props.name !== nextProps.name;
 
 export default functional(ComponentA);
 ```
@@ -160,16 +159,15 @@ You may notice we mutate Component A : we authorize mutation to add React lifecy
 We can use more pure solution :
 
 ```js
-import { React } from 'react'
-import functional from 'react-functional'
+import { React } from 'react';
+import functional from 'react-functional';
 
 const ComponentA = props => (
   <div>{ props.name }</div>
 );
 
 const hook = {
-  shouldComponentUpdate: (props, nextProps) =>
-       props.name !== nextProps.name
+  shouldComponentUpdate: (props, nextProps) => props.name !== nextProps.name,
 };
 
 export default functional(ComponentA, hook);
