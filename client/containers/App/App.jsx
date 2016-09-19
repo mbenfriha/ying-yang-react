@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import functional from 'react-functional';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { pick, path, pipe } from 'ramda';
 
 import TopHeader from '../../components/TopHeader/TopHeader';
 import Grid from '../../components/Grid';
@@ -11,14 +12,14 @@ import * as AppActions from '../../actions';
 
 const { arrayOf, shape, number, string, func } = PropTypes;
 
-const App = ({ transactions, gridFields, summary, actions }) => {
+const App = ({ transactions, summary, transactionsGrid, actions }) => {
   const { addTransaction } = actions;
 
   return (
     <div className="viewport">
       <TopHeader />
-      <Grid fields={gridFields} data={transactions}>
-        <TransactionSummary data={summary} fields={gridFields} />
+      <Grid fields={transactionsGrid} data={transactions}>
+        <TransactionSummary data={summary} fields={transactionsGrid} />
       </Grid>
       <TransactionForm action={addTransaction} />
     </div>
@@ -36,7 +37,7 @@ App.propTypes = {
   summary: shape({
     description: string.isRequired,
   }),
-  gridFields: arrayOf(shape({
+  transactionsGrid: arrayOf(shape({
     name: string.isRequired,
     className: string.isRequired,
     mapping: string.isRequired,
@@ -47,21 +48,9 @@ App.propTypes = {
   }).isRequired,
 };
 
-function mapStateToProps(state) {
-  const { transactions: { transactions, summary, transactionsGrid: gridFields } } = state;
+const mapStateToProps = pipe(path(['transactions']), pick(['transactions', 'summary', 'transactionsGrid']));
 
-  return {
-    transactions,
-    summary,
-    gridFields,
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(AppActions, dispatch),
-  };
-}
+const mapDispatchToProps = dispatch => ({ actions: bindActionCreators(AppActions, dispatch) });
 
 export default connect(
   mapStateToProps,
