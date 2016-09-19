@@ -1,13 +1,18 @@
-import { Provider } from 'react-redux';
-import ReactDOM from 'react-dom';
+/* eslint react/forbid-prop-types:0 */
+
 import React from 'react';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import { BrowserRouter, Match } from 'react-router';
 
 import App from './containers/App/App';
 import store from './store';
 
-ReactDOM.render(
+render(
   <Provider store={store}>
-    <App />
+    <BrowserRouter>
+      <Match exactly pattern="/" component={App} />
+    </BrowserRouter>
   </Provider>,
   document.getElementById('root'),
 );
