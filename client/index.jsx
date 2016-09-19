@@ -9,7 +9,7 @@ import store from './store';
 render(
   <Provider store={store}>
     <BrowserRouter>
-      <Match exactly pattern="/" component={App} />
+      <Match exactly pattern="*" component={App} />
     </BrowserRouter>
   </Provider>,
   document.getElementById('root'),
