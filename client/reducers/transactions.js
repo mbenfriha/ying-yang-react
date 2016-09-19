@@ -1,7 +1,20 @@
 /* eslint fp/no-nil:0 */
 
 import { combineReducers } from 'redux';
-import { pipe, map, reject, reduce, max, inc, propEq, prop, sum } from 'ramda';
+import {
+  pipe,
+  map,
+  reject,
+  reduce,
+  max,
+  inc,
+  propEq,
+  prop,
+  sum,
+  divide,
+  multiply,
+  partialRight,
+} from 'ramda';
 
 import {
   ADD_TRANSACTION,
@@ -86,7 +99,7 @@ function transactionsGrid(state = defaultTransactionGridFields, action) {
 function summary(state = defaultSummary, action) {
   switch (action.type) {
     case REQUEST_SUM: {
-      const round = x => Math.round(x * 100) / 100;
+      const round = pipe(multiply(100), Math.round, partialRight(divide, [100]));
 
       const transformToSum = pipe(
         map(pipe(prop('value'), Number)),
