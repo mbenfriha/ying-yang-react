@@ -1,5 +1,7 @@
-/* eslint-disable */
+/* eslint fp/no-nil:0 */
+
 import { combineReducers } from 'redux';
+import { pipe, map, reject, reduce, max, inc, propEq, prop, sum } from 'ramda';
 
 import {
   ADD_TRANSACTION,
@@ -23,11 +25,16 @@ import {
 function addTransaction(state, action) {
   const { description, value } = action.transaction;
 
-  return [...state, {
-    id: state.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1,
-    description,
-    value,
-  }];
+  const generateNextId = pipe(reduce((accum, next) => max(next.id, accum), -1), inc);
+
+  return [
+    ...state,
+    {
+      id: generateNextId(state),
+      description,
+      value,
+    },
+  ];
 }
 
 /**
@@ -38,19 +45,21 @@ function addTransaction(state, action) {
  */
 function transactions(state = defaultTransactions, action) {
   switch (action.type) {
-    case ADD_TRANSACTION:
+    case ADD_TRANSACTION: {
       return addTransaction(state, action);
+    }
 
-    case DELETE_TRANSACTION:
-      return state.filter(todo => todo.id !== action.id);
+    case DELETE_TRANSACTION: {
+      return reject(propEq('id', action.id), state);
+    }
 
-    default:
+    default: {
       return state;
+    }
   }
 }
 
 /**
- * Reserved for future use.
  * Intended for dynamic grid column setup
  * @param  {Object} state  Current state
  * @param  {Object} action Dispatched action
@@ -58,11 +67,13 @@ function transactions(state = defaultTransactions, action) {
  */
 function transactionsGrid(state = defaultTransactionGridFields, action) {
   switch (action.type) {
-    case GET_TRANSACTION_GRID_FIELDS:
+    case GET_TRANSACTION_GRID_FIELDS: {
       return state;
+    }
 
-    default:
+    default: {
       return state;
+    }
   }
 }
 
@@ -73,18 +84,24 @@ function transactionsGrid(state = defaultTransactionGridFields, action) {
  * @return {Object}        Default state
  */
 function summary(state = defaultSummary, action) {
-  let sum;
-
   switch (action.type) {
-    case REQUEST_SUM:
-      sum = action.data.reduce((prev, current) => ({ value: prev.value + current.value }));
+    case REQUEST_SUM: {
+      const round = x => Math.round(x * 100) / 100;
 
-      sum = { value: Math.round(sum.value * 100) / 100 };
+      const transformToSum = pipe(
+        map(pipe(prop('value'), Number)),
+        pipe(sum, round),
+      );
 
-      return { ...state, ...sum };
+      return {
+        ...state,
+        ...{ value: transformToSum(action.data) },
+      };
+    }
 
-    default:
+    default: {
       return state;
+    }
   }
 }
 
