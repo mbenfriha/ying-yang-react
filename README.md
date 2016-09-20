@@ -6,31 +6,27 @@
 
 [![Build Status](https://travis-ci.org/kMeillet/ying-yang-react.svg?branch=master)](https://travis-ci.org/kMeillet/ying-yang-react)
 
-React Ying Yang consist on a React boilerplate who can pretend to consume any API and make component testable and re-usable.
+We will produce a boilerplate with 3 consideration :
 
-We will produce a boilerplate with 3 way to follow :
-
-- Simple and elegant.
-- Use latest package.
-- If you need more, do it.
+- Functional, modulable, modern.
+- Latest package, regular update.
+- If you need more, plug it.
 
 # Content
 
-- WebPack 2 with dev/prod configuration, 3-shaking, multiple loaders/plugins (build system).
+- WebPack 2 with custom abstraction : 3-shaking, multiple loaders/plugins, mixins/hooks system.
 - Babel stage-2 (for productive code).
 - HMR with React Hot Loader (refresh your component)
 - Perfect CSS support : Autoprefixer + CSS mqPacker + CSS Comb.
 - EsLint (with AirBnB configuration + some presets to enforce good practice).
-- Radium (Inline React Style).
-- Axios (Http Request).
-- Jest & Enzyme (Testing) [IN PROGRESS]
-- Selenium Web Driver (E2E) [IN PROGRESS]
-- Ramda (FP).
+- Ramda (functional programming).
+- Radium (inline React Style).
+- Axios (http Request).
 - React with : react-dom, react-router, react-redux, react-functional.
 - Redux with : redux-form, redux-thunk.
 - Support for Redux DevTools : https://github.com/zalmoxisus/redux-devtools-extension
 
-# Install
+# How to install ?
 
 You need Node.js >= 6 and NPM >= 3.
 
@@ -38,47 +34,48 @@ You need Node.js >= 6 and NPM >= 3.
 git clone https://github.com/kMeillet/ying-yang-react
 cd ying-yang-react/
 npm i
+npm start
 ```
 
 # Script
 
-### Run server (dev)
+### Run development server
 
 ```sh
 npm start
 ```
 
-### Run build (prod)
+### Run production build
 
 ```sh
 npm run build
 ```
 
-### Run test (Jest)
+### Run test (Jest) [IN PROGRESS !]
 
 ```sh
 npm run test
 ```
 
-### Run test (Jest) watch server
+### Run test (Jest) watch server [IN PROGRESS !]
 
 ```sh
 npm run test:watch
 ```
 
-### Run E2E test (Selenium)
+### Run E2E test (Selenium) [IN PROGRESS !]
 
 ```sh
 npm run e2e
 ```
 
-### Run test suite (Jest + Selenium)
+### Run test suite (Jest + Selenium) [IN PROGRESS !]
 
 ```sh
 npm run suite
 ```
 
-### Deploy
+### Deploy [IN PROGRESS !]
 
 ```sh
 npm run publish
@@ -94,13 +91,15 @@ npm run updates
 
 ### Why i need this ?
 
-Boilerplate are opiniated and they have ton of possibility.
+Boilerplate are ***opiniated*** and they have ton of possibility.
 
-You need Ying Yang React if you want to make fast project with simple configuration.
+Boilerplate are used to simplify build-process and focus on project instead of architecture.
 
 If you disallow regular object-oriented programming with class and want to use more functional and pure functions, you're in right place.
 
 Otherwise, you may probably need to use regular React boilerplate or make your one.
+
+You ***never*** need boilerplate to use React, an HTML file with <script> tag can do it alone.
 
 ### I can't use class and this, what the hell ?
 
@@ -117,13 +116,13 @@ The project follow hard rules to enforce good practice for more functional proje
 - Don't use rest parameters.
 - Don't write unused expression.
 - Don't use valueOf.
-- You can use "console" object (but don't forget to disable this rule before production).
+- You can't use "console" object, use external logger.
 - Default ES6 import without name permitted for merging component.
 - Write component as function, forget React.createClass or React.Component.
 - Stateless function please.
 - No React string refs.
 - Function with new cap without constructor are authorized (like Ramda F()).
-- For the rest, we follow AirBnB JavaScript standard + React plugin rules, classic.
+- For the rest, we follow AirBnB JavaScript standard + React plugin rules.
 
 Why we need that ?
 
@@ -156,7 +155,7 @@ export default functional(ComponentA);
 
 You may notice we mutate Component A : we authorize mutation to add React lifecycle hook and propTypes/defaultProps.
 
-We can use more pure solution :
+We can use more pure solution (you can use one of them) :
 
 ```js
 import { React } from 'react';
@@ -181,7 +180,7 @@ React Router v4 doc : https://github.com/ReactTraining/react-router/blob/v4/READ
 
 No, spec. can change and we try to use pure function to prevent context binding.
 
-If you need it, use it.
+Decorators are really awesome but we don't need it.
 
 ### Can i move to Babel stage-0 ?
 
@@ -195,9 +194,7 @@ Then, edit ".babelrc" file.
 
 Ramda has a more focused goal.
 
-Ramda use pattern like iterable, transducer, curry.
-
-Ramda can implement Fantasy Land algebraic data-structure if needed (https://github.com/fantasyland/fantasy-land).
+Ramda implement Fantasy Land algebraic data-structure (https://github.com/fantasyland/fantasy-land).
 
 Ramda is designed specifically for a functional programming style, one that makes it easy to create functional pipelines, one that never mutates user data.
 
@@ -212,3 +209,66 @@ Yes, with immutable PropTypes, that will be good : https://www.npmjs.com/package
 ### How i can add vendor in my project ?
 
 You can add/remove vendor file in "client/vendor.js".
+
+### How i can change WebPack configuration ?
+
+We use custom abstraction to leverage friction with WebPack.
+
+In "__env__" directory, you can find 2 configuration environment : production or development.
+
+You can make your own environment and use it with WebPack.
+ 
+Builder function return WebPack 2 configuration and use 4 params :
+
+- Base provider (a default WebPack configuration).
+- Mixins list.
+- Loader list.
+- Plugins list.
+
+### Can i make global conf for all environment ?
+
+No, every environment has own configuration with mixins, plugins, loaders and base configuration provider.
+
+### How i can use a new loader ?
+
+List of available loaders :
+
+- Assets (images, fonts, videos, sound)
+- Babel
+- CSS
+- ESLint
+- JSON
+
+You can add any loader : install it via npm and write a new loader file in "__env__/providers/loaders" directory with boilerplate :
+
+```js
+'use strict';
+
+const ext = [];
+
+const wrapper = {};
+
+const pre = {};
+
+const post = {};
+
+module.exports = {
+  ext,
+  wrapper,
+  pre,
+  post,
+};
+````
+
+As you can see, loaders are plain object with 4 props :
+ 
+- ext : an array of extensions (like .js, .jsx) to target.
+- wrapper : wrap provider with custom configuration if needed.
+- pre, post : preLoaders, loaders.
+
+### How i can remove/add a WebPack plugin ?
+
+### How i can remove/add mixin ?
+
+Mixin are useful for fast-change on configuration, like enabled devTools or run dev server.
+
