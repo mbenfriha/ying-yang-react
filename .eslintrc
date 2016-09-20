@@ -80,7 +80,6 @@
     "fp/no-throw": 2,
     "fp/no-valueof-field": 2,
     "no-var": 2,
-    "no-console": 0,
     "new-cap": 0,
     "import/no-named-as-default": 0,
     "react/require-extension": "off"
