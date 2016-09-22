@@ -9,4 +9,3 @@ const wrapper = (path, filename = '[name].js', publicPath = '/') => ({
 });
 
 module.exports = wrapper;
-

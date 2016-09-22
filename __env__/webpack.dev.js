@@ -22,7 +22,7 @@ builder(
       vendor: ['./client/vendor.js'],
       app: ['./client/index.jsx', './client/critical.css'],
     }),
-    OutputMixin('./dist', '[name].js'),
+    OutputMixin('./dist', '[name].js', ''),
     DevServer('http://localhost', 3000),
   ],
   [
@@ -37,6 +37,7 @@ builder(
     NoErrorPlugin(),
     DashboardPlugin(),
     HTMLPlugin(),
+    HotPlugin(),
     BrowserPlugin('http://localhost', 3000)
   ]
 );

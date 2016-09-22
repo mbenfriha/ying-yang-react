@@ -10,7 +10,7 @@ const baseProvider = () => ({
   entry: {},
   output: {},
   resolve: {
-    extensions: [''],
+    extensions: [],
   },
   module: {
     preLoaders: [],
@@ -38,7 +38,7 @@ const baseServerProvider = provider => ({
 });
 
 module.exports = {
-  hasLoader,
   notEmpty,
+  hasLoader,
   baseProvider,
 };
