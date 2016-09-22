@@ -16,9 +16,12 @@ const loader = {
   loaders: ['css', 'postcss', 'csscomb'],
 };
 
+const post = {};
+
 module.exports = {
   ext,
   wrapper,
   pre,
   loader,
+  post,
 };

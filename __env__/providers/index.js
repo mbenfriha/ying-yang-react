@@ -49,13 +49,21 @@ const loader = pipe(
   )
 );
 
+const post = pipe(
+  map(prop('post')),
+  notEmpty,
+  reduce(({ postLoaders }, obj) =>
+    ({ postLoaders: [...postLoaders, obj] }), { postLoaders: [] }
+  )
+);
+
 const applyLoaders = loaders => provider =>
   mergeAll([
     provider,
     ext(loaders),
     wrap(loaders),
     {
-      module: mergeAll([pre(loaders), loader(loaders)]),
+      module: mergeAll([pre(loaders), loader(loaders), post(loaders)]),
     },
   ]);
 

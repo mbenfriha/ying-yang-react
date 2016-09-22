@@ -15,9 +15,12 @@ const loader = {
   },
 };
 
+const post = {};
+
 module.exports = {
   ext,
   wrapper,
   pre,
   loader,
+  post,
 };

@@ -16,9 +16,12 @@ const loader = {
   exclude: [/node_modules/],
 };
 
+const post = {};
+
 module.exports = {
   ext,
   wrapper,
   pre,
   loader,
+  post,
 };
