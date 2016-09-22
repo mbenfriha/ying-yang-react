@@ -33,12 +33,12 @@ module.exports = builder(
     JsonLoader,
   ],
   [
-    ProgressBarPlugin(),
-    AssetsPlugin('/'),
-    ChunkPlugin(),
     DefinePlugin('production'),
+    ProgressBarPlugin(),
+    ChunkPlugin(),
+    MinifyPlugin(),
+    AssetsPlugin('/'),
     ExtractCssPlugin('[name].[contenthash:8].css'),
     HtmlPlugin('index.html', './client/index.html'),
-    MinifyPlugin(),
   ]
 );
