@@ -14,6 +14,7 @@ const {
   BrowserPlugin,
 } = require('./providers/plugins');
 
+// Provider, Mixins, Loaders and Plugins
 builder(
   baseProvider(),
   [

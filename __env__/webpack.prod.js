@@ -15,6 +15,7 @@ const {
   ProgressBarPlugin,
 } = require('./providers/plugins');
 
+// Provider, Mixins, Loaders and Plugins
 module.exports = builder(
   baseProvider(),
   [
