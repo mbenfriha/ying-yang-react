@@ -1,10 +1,10 @@
 'use strict';
 
-const wrapper = (publicPath, filename = '[name].js', path = '/') => ({
+const wrapper = (path, filename = '[name].js', publicPath = '/') => ({
   output: {
     path,
-    publicPath,
     filename,
+    publicPath,
   },
 });
 
