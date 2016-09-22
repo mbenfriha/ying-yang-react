@@ -252,14 +252,11 @@ const pre = {};
 
 const loader = {};
 
-const post = {};
-
 module.exports = {
   ext,
   wrapper,
   pre,
   loader,
-  post,
 };
 ````
 
@@ -267,7 +264,7 @@ As you can see, loaders are plain object with 4 props :
  
 - ext : an array of extensions (like .js, .jsx) to target.
 - wrapper : wrap provider with custom configuration if needed.
-- pre, loader, post : preLoaders, loaders, postLoaders.
+- pre, loader : preLoaders, loaders.
 
 ### How i can remove/add a WebPack plugin ?
 
