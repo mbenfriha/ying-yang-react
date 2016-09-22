@@ -9,8 +9,11 @@ const {
   prop,
   flatten,
   uniq,
+  flip,
+  call,
   mergeAll,
-  uncurryN
+  curry,
+  uncurryN,
 } = require('ramda');
 
 const ext = pipe(
@@ -65,7 +68,7 @@ const applyLoaders = loaders => provider =>
 const applyMixins = mixins => provider => mergeAll([provider, ...mixins]);
 
 const applyPlugins = plugins => provider =>
-  mergeAll([provider, { plugins: flatten(plugins.map(plugin => plugin(provider))) }]);
+  mergeAll([provider, { plugins: flatten(plugins.map(flip(curry(call))(provider))) }]);
 
 const provide = provider => mixins => loaders => plugins =>
   applyPlugins(plugins)(applyLoaders(loaders)(applyMixins(mixins)(provider)));
