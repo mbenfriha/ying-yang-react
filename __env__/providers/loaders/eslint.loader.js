@@ -13,7 +13,7 @@ const wrapper = {
 
 const pre = {
   test: /\.(js|jsx)$/,
-  loader: 'eslint',
+  loaders: ['eslint'],
   exclude: [/node_modules/],
 };
 

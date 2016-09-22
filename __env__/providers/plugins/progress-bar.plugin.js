@@ -2,6 +2,6 @@
 
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 
-const wrapper = () => new ProgressBarPlugin();
+const wrapper = () => provider => new ProgressBarPlugin();
 
 module.exports = wrapper;

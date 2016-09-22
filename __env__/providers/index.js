@@ -10,13 +10,14 @@ const {
   flatten,
   uniq,
   mergeAll,
+  uncurryN
 } = require('ramda');
 
 const ext = pipe(
   map(prop('ext')),
   flatten,
   uniq,
-  reduce(({resolve: { extensions }}, key) => ({ resolve: { extensions: [...extensions, key] } }), { resolve: { extensions: [] } })
+  reduce(({ resolve: { extensions } }, key) => ({ resolve: { extensions: [...extensions, key] } }), { resolve: { extensions: [] } })
 );
 
 const wrap = pipe(
@@ -40,11 +41,12 @@ const loader = pipe(
 const post = pipe(
   map(prop('post')),
   notEmpty,
-  reduce(({ postLoaders }, obj) => ({ postLoaders: [...postLoaders, obj] }), { postLoaders: [] })
+  reduce(({ postLoaders }, obj) => ({ postLoaders: [...postLoaders, obj] }), { postLoaders: [] })
 );
 
-const buildLoaders = loaders =>
+const applyLoaders = loaders => provider =>
   mergeAll([
+    provider,
     ext(loaders),
     wrap(loaders),
     {
@@ -52,16 +54,28 @@ const buildLoaders = loaders =>
     },
   ]);
 
-const applyMixins = mixins => mergeAll(mixins);
+const applyMixins = mixins => provider => mergeAll([provider, ...mixins]);
 
-const applyPlugins = plugins => ({ plugins: flatten(plugins) });
+const applyPlugins = plugins => provider => mergeAll([provider, { plugins: flatten(plugins.map(plugin => plugin(provider))) }]);
 
-const provide = mixins => loaders => plugins => provider => mergeAll([applyMixins(mixins), buildLoaders(loaders), applyPlugins(plugins)]);
+const provide = provider => mixins => loaders => plugins => {
+  const a = applyMixins(mixins)(provider);
+  const b = applyLoaders(loaders)(a);
+  const c = applyPlugins(plugins)(b);
 
-const builder = (provider, mixins, loaders, plugins) => {
-  const hey = provide(mixins)(loaders)(plugins)(provider);
+  console.log(c);
 
-  return hey;
+  return c;
 };
+
+/**
+ * Public API - WebPack configuration builder
+ * Use it in your environment
+ * @param {Object}          provider
+ * @param {Array<Object>}   mixins
+ * @param {Array<Object>}   loaders
+ * @param {Array<Function>} plugins
+ */
+const builder = uncurryN(4, provide);
 
 module.exports = builder;

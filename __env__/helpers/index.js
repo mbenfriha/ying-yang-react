@@ -4,9 +4,7 @@ const path = require('path');
 const { filter, isEmpty, complement } = require('ramda');
 
 const notEmpty = filter(complement(isEmpty));
-const hasResolvers = resolvers => provider => resolvers.every(provider.resolve.extensions.includes);
-const hasLoader = loader => provider => provider.loaders.includes(loader);
-const hasPreLoader = preLoader => provider => provider.preLoaders.includes(preLoader);
+const hasLoader = seek => loader => loader.loaders.includes(seek);
 
 const baseProvider = () => ({
   entry: {},
@@ -40,9 +38,7 @@ const baseServerProvider = provider => ({
 });
 
 module.exports = {
-  hasResolvers,
   hasLoader,
-  hasPreLoader,
   notEmpty,
   baseProvider,
 };

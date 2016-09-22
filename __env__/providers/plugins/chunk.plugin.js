@@ -2,7 +2,7 @@
 
 const { optimize: { CommonsChunkPlugin } } = require('webpack');
 
-const wrapper = () =>
+const wrapper = () => provider =>
   new CommonsChunkPlugin({
     name: 'vendor',
     minChunks: Infinity,

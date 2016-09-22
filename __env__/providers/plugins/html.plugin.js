@@ -9,7 +9,7 @@ const sort = cond([
   [T, always(0)],
 ]);
 
-const wrapper = template =>
+const wrapper = template => provider =>
   new HtmlWebpackPlugin({
     filename: 'index.html',
     inject: true,
