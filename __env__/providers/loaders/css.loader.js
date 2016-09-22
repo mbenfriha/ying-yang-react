@@ -2,7 +2,12 @@
 
 const ext = ['.css'];
 
-const wrapper = {};
+const wrapper = {
+  postcss: [
+    require('autoprefixer')({ browsers: ['last 2 versions', 'ie > 8'] }),
+    require('css-mqpacker')(),
+  ],
+};
 
 const pre = {};
 
@@ -20,5 +25,3 @@ module.exports = {
   loader,
   post,
 };
-
-// ['last 2 versions', 'ie > 8']
