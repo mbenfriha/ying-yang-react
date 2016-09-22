@@ -1,54 +1,44 @@
 'use strict';
 
-const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const ProgressBarPlugin = require('progress-bar-webpack-plugin');
-const AssetsPlugin = require('assets-webpack-plugin');
-const provider = require('./providers');
-const { output, extraGlobalPlugins } = require('./providers/config');
-const { isLoader } = require('./providers/helpers');
+const { baseProvider } = require('./helpers');
+const builder = require('./providers');
 
-provider.devtool = false;
-provider.output.filename = '[name].[chunkhash:8].js';
+const { DevToolMixin, InputMixin, OutputMixin } = require('./providers/mixins');
+const { AssetsLoader, BabelLoader, CssLoader, EsLintLoader, JsonLoader } = require('./providers/loaders');
+const {
+  AssetsPlugin,
+  ChunkPlugin,
+  DefinePlugin,
+  ExtractCssPlugin,
+  HtmlPlugin,
+  MinifyPlugin,
+  ProgressBarPlugin,
+} = require('./providers/plugins');
 
-provider.plugins.push(
-  new ProgressBarPlugin(),
-  new ExtractTextPlugin('[name].[contenthash:8].css'),
-  new webpack.DefinePlugin(
-    Object.assign(
-      { 'process.env.NODE_ENV': JSON.stringify('production') },
-      extraGlobalPlugins
-    )
-  ),
-  new webpack.optimize.CommonsChunkPlugin({
-    name: 'vendor',
-    minChunks: Infinity,
-    filename: 'vendor.[chunkhash:8].js'
-  }),
-  new webpack.LoaderOptionsPlugin({
-    minimize: true,
-    debug: false,
-  }),
-  new webpack.optimize.UglifyJsPlugin({
-    compress: {
-      warnings: false,
-    },
-    comments: false,
-  }),
-  new AssetsPlugin({ filename: `${output}assets.json` })
+module.exports = builder(
+  baseProvider(),
+  [
+    DevToolMixin(false),
+    InputMixin({
+      vendor: ['./client/vendor.js'],
+      app: ['./client/index.jsx', './client/critical.css'],
+    }),
+    OutputMixin('./dist', '[name].[chunkhash:8].js'),
+  ],
+  [
+    AssetsLoader,
+    BabelLoader,
+    CssLoader,
+    EsLintLoader,
+    JsonLoader,
+  ],
+  [
+    ProgressBarPlugin(),
+    AssetsPlugin('/'),
+    ChunkPlugin(),
+    DefinePlugin('production'),
+    ExtractCssPlugin('[name].[contenthash:8].css'),
+    HtmlPlugin('index.html', './client/index.html'),
+    MinifyPlugin(),
+  ]
 );
-
-/**
- * CSS Extraction in production
- */
-provider
-  .module
-  .loaders
-  .filter(isLoader('css'))
-  .forEach(loader => {
-    loader.loader = ExtractTextPlugin.extract(loader.loaders);
-
-    delete loader['loaders'];
-  });
-
-module.exports = provider;

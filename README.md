@@ -51,25 +51,25 @@ npm start
 npm run build
 ```
 
-### Run test (Jest) [IN PROGRESS !]
+### Run test [IN PROGRESS !]
 
 ```sh
 npm run test
 ```
 
-### Run test (Jest) watch server [IN PROGRESS !]
+### Run test watch server [IN PROGRESS !]
 
 ```sh
 npm run test:watch
 ```
 
-### Run E2E test (Selenium) [IN PROGRESS !]
+### Run E2E test [IN PROGRESS !]
 
 ```sh
 npm run e2e
 ```
 
-### Run test suite (Jest + Selenium) [IN PROGRESS !]
+### Run test suite [IN PROGRESS !]
 
 ```sh
 npm run suite
@@ -250,12 +250,15 @@ const wrapper = {};
 
 const pre = {};
 
+const loader = {};
+
 const post = {};
 
 module.exports = {
   ext,
   wrapper,
   pre,
+  loader,
   post,
 };
 ````
@@ -264,7 +267,7 @@ As you can see, loaders are plain object with 4 props :
  
 - ext : an array of extensions (like .js, .jsx) to target.
 - wrapper : wrap provider with custom configuration if needed.
-- pre, post : preLoaders, loaders.
+- pre, loader, post : preLoaders, loaders, postLoaders.
 
 ### How i can remove/add a WebPack plugin ?
 

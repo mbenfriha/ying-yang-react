@@ -1,52 +1,46 @@
 'use strict';
 
-const webpack = require('webpack');
-const WebpackDevServer = require('webpack-dev-server');
-const WebpackBrowserPlugin = require('webpack-browser-plugin');
-const DashboardPlugin = require('webpack-dashboard/plugin');
-const provider = require('./providers');
-const { port, baseUrl, extraGlobalPlugins } = require('./providers/config');
-const { isLoader, listen, provideServer } = require('./providers/helpers');
+const { baseProvider } = require('./helpers');
+const builder = require('./providers');
 
-provider.devtool = 'cheap-eval-source-map';
-provider.output.publicPath = `http://localhost:${port}${baseUrl}`;
-provider.output.path = '/__tmp__/';
+const { DevToolMixin, FileNameMixin, HookMixin, InputMixin, OutputMixin } = require('./providers/mixins');
+const { AssetsLoader, BabelLoader, CssLoader, EsLintLoader, JsonLoader } = require('./providers/loaders');
+const {
+  NoErrorPlugin,
+  DefinePlugin,
+  HTMLPlugin,
+  DevServer,
+} = require('./providers/plugins');
 
-provider.plugins.push(
-  new webpack.DefinePlugin(
-    Object.assign(
-      { 'process.env.NODE_ENV': JSON.stringify('development') },
-      extraGlobalPlugins
-    )
-  ),
-  new webpack.NoErrorsPlugin(),
-  new webpack.HotModuleReplacementPlugin(),
-  new DashboardPlugin(),
-  new WebpackBrowserPlugin({ url: 'http://localhost', port })
+builder(
+  baseProvider(),
+  [
+    AssetsLoader,
+    BabelLoader,
+    CssLoader,
+    EsLintLoader,
+    JsonLoader,
+  ],
+  [
+    DevToolMixin(true),
+    InputMixin({
+      vendor: ['./client/vendor.js'],
+      app: ['./client/index.jsx', './client/critical.css'],
+    }),
+    OutputMixin('./dist'),
+    FileNameMixin('[name].[chunkhash:8].js'),
+    HookMixin({
+      start: () => console.log('[REACT YING YANG] Server start !'),
+      stop: () => console.log('[REACT YING YANG] Server end !'),
+    }),
+    DevServer('http://localhost', 3000),
+  ],
+  [
+    DashboardPlugin,
+    DefinePlugin('development'),
+    HTMLPlugin,
+    HotModuleReplacementPlugin,
+    NoErrorPlugin,
+    BrowserPlugin('http://localhost', 3000)
+  ]
 );
-
-provideServer(provider);
-
-provider
-  .module
-  .loaders
-  .filter(isLoader('css'))
-  .forEach(loader => {
-    loader.loaders = ['style', ...loader.loaders];
-  });
-
-listen(new WebpackDevServer(webpack(provider), {
-  hot: true,
-  historyApiFallback: true,
-  compress: true,
-  quiet: true,
-  noInfo: false,
-  stats: { colors: true },
-  publicPath: provider.output.publicPath,
-  watchOptions: {
-    aggregateTimeout: 300,
-    poll: 50,
-  },
-}), 'localhost', port)
-  .then(response => console.log(response))
-  .catch(error => console.log(error));

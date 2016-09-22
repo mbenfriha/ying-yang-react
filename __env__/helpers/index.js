@@ -1,34 +1,48 @@
 'use strict';
 
 const path = require('path');
-const { port } = require('./config');
+const { filter, isEmpty, complement } = require('ramda');
 
-const wrap = (...args) => Object.assign({}, ...args);
+const notEmpty = filter(complement(isEmpty));
+const hasResolvers = resolvers => provider => resolvers.every(provider.resolve.extensions.includes);
+const hasLoader = loader => provider => provider.loaders.includes(loader);
+const hasPreLoader = preLoader => provider => provider.preLoaders.includes(preLoader);
 
-const root = (...args) => path.join(__dirname, ...args);
+const baseProvider = () => ({
+  entry: {},
+  output: {},
+  resolve: {
+    extensions: [''],
+  },
+  module: {
+    preLoaders: [],
+    loaders: [],
+    postLoaders: [],
+  },
+  plugins: [],
+  devServer: {
+    headers: { 'Access-Control-Allow-Origin': '*' },
+  },
+});
 
-const isLoader = include => loader => loader.loaders && loader.loaders.includes(include);
-
-const listen = (webpackServer, host, port) =>
-  new Promise((resolve, reject) =>
-    webpackServer.listen(port, host, error => {
-      if (error) {
-        return reject({ errors: [error] });
-      }
-
-      return resolve(`===> Server started on http://${host}:${port}`);
-    })
-  );
-
-const provideServer = (provider, port) =>
-  Object
-    .keys(provider.entry)
-    .forEach(k => provider.entry[k].unshift(`webpack-dev-server/client?http://0.0.0.0:${port}`, 'webpack/hot/only-dev-server'));
+const baseServerProvider = provider => ({
+  hot: true,
+  historyApiFallback: true,
+  compress: true,
+  quiet: true,
+  noInfo: false,
+  stats: { colors: true },
+  publicPath: provider.output.publicPath,
+  watchOptions: {
+    aggregateTimeout: 300,
+    poll: 50,
+  },
+});
 
 module.exports = {
-  wrap,
-  root,
-  isLoader,
-  listen,
-  provideServer,
+  hasResolvers,
+  hasLoader,
+  hasPreLoader,
+  notEmpty,
+  baseProvider,
 };

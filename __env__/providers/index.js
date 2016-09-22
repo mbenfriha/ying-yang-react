@@ -1,92 +1,67 @@
 'use strict';
 
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { root } = require('./helpers');
-const { entry, baseUrl: publicPath, output: path, autoprefixer: browsers } = require('./config');
+const { notEmpty } = require('../helpers');
 
-const postcss = [
-  require('autoprefixer')({ browsers }),
-  require('css-mqpacker')(),
-];
+const {
+  pipe,
+  reduce,
+  map,
+  prop,
+  flatten,
+  uniq,
+  mergeAll,
+} = require('ramda');
 
-const eslint = {
-  configFile: root('../../.eslintrc'),
-  formatter: require('eslint-friendly-formatter'),
-};
+const ext = pipe(
+  map(prop('ext')),
+  flatten,
+  uniq,
+  reduce(({resolve: { extensions }}, key) => ({ resolve: { extensions: [...extensions, key] } }), { resolve: { extensions: [] } })
+);
 
-const babel = {
-  babelrc: root('../../client/.babelrc'),
-};
+const wrap = pipe(
+  map(prop('wrapper')),
+  notEmpty,
+  mergeAll
+);
 
-module.exports = {
-  entry,
-  output: {
-    path,
-    filename: '[name].js',
-    publicPath,
-  },
-  resolve: {
-    extensions: ['', '.js', '.jsx', '.css', '.json'],
-    alias: {
-      root: root('../../client/'),
+const pre = pipe(
+  map(prop('pre')),
+  notEmpty,
+  reduce(({ preLoaders }, obj) => ({ preLoaders: [...preLoaders, obj] }), { preLoaders: [] })
+);
+
+const loader = pipe(
+  map(prop('loader')),
+  notEmpty,
+  reduce(({ loaders }, obj) => ({ loaders: [...loaders, obj] }), { loaders: [] })
+);
+
+const post = pipe(
+  map(prop('post')),
+  notEmpty,
+  reduce(({ postLoaders }, obj) => ({ postLoaders: [...postLoaders, obj] }), { postLoaders: [] })
+);
+
+const buildLoaders = loaders =>
+  mergeAll([
+    ext(loaders),
+    wrap(loaders),
+    {
+      module: mergeAll([pre(loaders), loader(loaders), post(loaders)]),
     },
-  },
-  module: {
-    preLoaders: [
-      {
-        test: /\.(js|jsx)$/,
-        loader: 'eslint',
-        exclude: [/node_modules/],
-      },
-    ],
-    loaders: [
-      {
-        test: /\.(js|jsx)$/,
-        loaders: ['babel'],
-        exclude: [/node_modules/],
-      },
-      {
-        test: /\.css$/,
-        loaders: ['css', 'postcss', 'csscomb'],
-      },
-      {
-        test: /\.json$/,
-        loaders: 'file',
-        exclude: [/node_modules/],
-      },
-      {
-        test: /\.(png|jpe?g|gif|svg|woff2?|eot|ttf|otf|wav)(\?.*)?$/,
-        loader: 'url',
-        query: {
-          limit: 10,
-          name: '[name].[hash:7].[ext]',
-        },
-      },
-    ],
-  },
-  plugins: [
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: root('../../client/index.html'),
-      inject: true,
-      chunksSortMode: (a, b) => {
-        if (a.names[0] < b.names[0]) {
-          return 1;
-        }
+  ]);
 
-        if (a.names[0] > b.names[0]) {
-          return -1;
-        }
+const applyMixins = mixins => mergeAll(mixins);
 
-        return 0;
-      },
-    }),
-  ],
-  devServer: {
-    headers: { 'Access-Control-Allow-Origin': '*' }
-  },
-  babel,
-  postcss,
-  eslint,
+const applyPlugins = plugins => ({ plugins: flatten(plugins) });
+
+const provide = mixins => loaders => plugins => provider => mergeAll([applyMixins(mixins), buildLoaders(loaders), applyPlugins(plugins)]);
+
+const builder = (provider, mixins, loaders, plugins) => {
+  const hey = provide(mixins)(loaders)(plugins)(provider);
+
+  return hey;
 };
+
+module.exports = builder;
