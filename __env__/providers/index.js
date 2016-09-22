@@ -16,8 +16,10 @@ const {
   uncurryN,
 } = require('ramda');
 
+const mapProp = x => map(prop(x));
+
 const ext = pipe(
-  map(prop('ext')),
+  mapProp('ext'),
   flatten,
   uniq,
   reduce(({ resolve: { extensions } }, key) =>
@@ -26,13 +28,13 @@ const ext = pipe(
 );
 
 const wrap = pipe(
-  map(prop('wrapper')),
+  mapProp('wrapper'),
   notEmpty,
   mergeAll
 );
 
 const pre = pipe(
-  map(prop('pre')),
+  mapProp('pre'),
   notEmpty,
   reduce(({ preLoaders }, obj) =>
     ({ preLoaders: [...preLoaders, obj] }), { preLoaders: [] }
@@ -40,7 +42,7 @@ const pre = pipe(
 );
 
 const loader = pipe(
-  map(prop('loader')),
+  mapProp('loader'),
   notEmpty,
   reduce(({ loaders }, obj) =>
     ({ loaders: [...loaders, obj] }), { loaders: [] }
