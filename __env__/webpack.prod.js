@@ -23,7 +23,7 @@ module.exports = builder(
       vendor: ['./client/vendor.js'],
       app: ['./client/index.jsx', './client/critical.css'],
     }),
-    OutputMixin('./dist', '[name].[chunkhash:8].js'),
+    OutputMixin('./dist/', '[name].[chunkhash:8].js'),
   ],
   [
     AssetsLoader,
@@ -37,8 +37,8 @@ module.exports = builder(
     ProgressBarPlugin(),
     ChunkPlugin(),
     MinifyPlugin(),
-    AssetsPlugin('/'),
+    AssetsPlugin('./dist/'),
     ExtractCssPlugin('[name].[contenthash:8].css'),
-    HtmlPlugin('index.html', './client/index.html'),
+    HtmlPlugin('./client/index.html'),
   ]
 );
