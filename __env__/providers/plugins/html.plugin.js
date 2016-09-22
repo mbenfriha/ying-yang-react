@@ -1,23 +1,20 @@
 'use strict';
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { cond, always, lt, gt, T } = require('ramda');
 
-const wrapper = (filename, template) =>
+const sort = cond([
+  [lt, always(1)],
+  [gt, always(-1)],
+  [T, always(0)],
+]);
+
+const wrapper = template =>
   new HtmlWebpackPlugin({
-    filename,
-    template,
+    filename: 'index.html',
     inject: true,
-    chunksSortMode: (a, b) => {
-      if (a.names[0] < b.names[0]) {
-        return 1;
-      }
-
-      if (a.names[0] > b.names[0]) {
-        return -1;
-      }
-
-      return 0;
-    },
+    chunksSortMode: (a, b) => sort(a.names[0], b.names[0]),
+    template,
   });
 
 module.exports = wrapper;
