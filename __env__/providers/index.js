@@ -1,6 +1,7 @@
 'use strict';
 
 const { notEmpty } = require('../helpers');
+const { LoaderOptionsPlugin } = require('webpack');
 
 const {
   pipe,
@@ -36,44 +37,47 @@ const wrap = pipe(
 const pre = pipe(
   mapProp('pre'),
   notEmpty,
-  reduce(({ preLoaders }, obj) =>
-    ({ preLoaders: [...preLoaders, obj] }), { preLoaders: [] }
-  )
+  reduce((loaders, obj) => [...loaders, Object.assign(obj, { enforce: 'pre' })], [])
 );
 
 const loader = pipe(
   mapProp('loader'),
   notEmpty,
-  reduce(({ loaders }, obj) =>
-    ({ loaders: [...loaders, obj] }), { loaders: [] }
-  )
+  reduce((loaders, obj) => [...loaders, obj], [])
 );
 
 const post = pipe(
-  map(prop('post')),
+  mapProp('post'),
   notEmpty,
-  reduce(({ postLoaders }, obj) =>
-    ({ postLoaders: [...postLoaders, obj] }), { postLoaders: [] }
-  )
+  reduce((loaders, obj) => [...loaders, Object.assign(obj, { enforce: 'post' })], [])
 );
 
 const applyLoaders = loaders => provider =>
   mergeAll([
     provider,
     ext(loaders),
-    wrap(loaders),
     {
-      module: mergeAll([pre(loaders), loader(loaders), post(loaders)]),
+      module: {
+        loaders: [...pre(loaders), ...loader(loaders), ...post(loaders)],
+      },
     },
   ]);
 
 const applyMixins = mixins => provider => mergeAll([provider, ...mixins]);
 
-const applyPlugins = plugins => provider =>
-  mergeAll([provider, { plugins: flatten(plugins.map(flip(curry(call))(provider))) }]);
+const applyPlugins = (options, plugins) => provider =>
+  mergeAll([provider, {
+    plugins: [
+      ...flatten(plugins.map(flip(curry(call))(provider))),
+      new LoaderOptionsPlugin({
+        minimize: true,
+        options: Object.assign({ context: __dirname }, options),
+      }),
+    ],
+  }]);
 
 const provide = provider => mixins => loaders => plugins =>
-  applyPlugins(plugins)(applyLoaders(loaders)(applyMixins(mixins)(provider)));
+  applyPlugins(wrap(loaders), plugins)(applyLoaders(loaders)(applyMixins(mixins)(provider)));
 
 /**
  * Public API - WebPack configuration builder
