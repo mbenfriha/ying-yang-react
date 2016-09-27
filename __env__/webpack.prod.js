@@ -3,7 +3,7 @@
 const { baseProvider } = require('./helpers');
 const builder = require('./providers');
 
-const { DevToolMixin, InputMixin, OutputMixin } = require('./providers/mixins');
+const { InputMixin, OutputMixin } = require('./providers/mixins');
 const { AssetsLoader, BabelLoader, CssLoader, EsLintLoader, JsonLoader } = require('./providers/loaders');
 const {
   AssetsPlugin,
@@ -13,13 +13,13 @@ const {
   HtmlPlugin,
   MinifyPlugin,
   ProgressBarPlugin,
+  DevToolPlugin,
 } = require('./providers/plugins');
 
 // Provider, Mixins, Loaders and Plugins
 module.exports = builder(
   baseProvider(),
   [
-    DevToolMixin(false),
     InputMixin({
       vendor: ['./client/vendor.js'],
       app: ['./client/index.jsx', './client/critical.css'],
@@ -35,6 +35,7 @@ module.exports = builder(
   ],
   [
     DefinePlugin('production'),
+    DevToolPlugin(true),
     ProgressBarPlugin(),
     ChunkPlugin(),
     MinifyPlugin(),
@@ -43,3 +44,4 @@ module.exports = builder(
     HtmlPlugin('./client/index.html'),
   ]
 );
+N
