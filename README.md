@@ -1,8 +1,6 @@
 # ying-yang-react
 
-![](http://image.noelshack.com/fichiers/2016/37/1473789222-sucess.jpg)
-
-![](http://image.noelshack.com/fichiers/2016/37/1473789284-screen-1.jpg)
+![](http://image.noelshack.com/fichiers/2016/39/1475014879-server.jpg)
 
 [![Build Status](https://travis-ci.org/kMeillet/ying-yang-react.svg?branch=master)](https://travis-ci.org/kMeillet/ying-yang-react)
 
@@ -233,7 +231,7 @@ No, every environment has own configuration with mixins, plugins, loaders and ba
 
 List of available loaders :
 
-- Assets (images, fonts, videos, sound)
+- Assets (images, fonts, videos, sounds)
 - Babel
 - CSS
 - ESLint
@@ -266,12 +264,46 @@ module.exports = {
 As you can see, loaders are plain object with 4 props :
  
 - ext : an array of extensions (like .js, .jsx) to target.
-- wrapper : wrap provider with custom configuration if needed.
-- pre, loader, post : preLoaders, loaders, postLoaders.
+- wrapper : wrap loader with custom configuration if needed.
+- pre, loader, post : preLoaders, loaders, postLoaders, like in WebPack.
 
-### How i can remove/add a WebPack plugin ?
+### How i can use a new plugin ?
 
-### How i can remove/add mixin ?
+List of available plugins :
 
-Mixin are useful for fast-change on configuration, like enabled devTools or run dev server.
+- Assets (create assets.json file for cache)
+- Browser (start browser after compiling)
+- Chunk (split code into multiple chunk)
+- Dashboard (start WebPack dashboard)
+- Define (define global variable)
+- DevTool (enabled dev tool and debug mode)
+- ExtractCSS (extract CSS into file)
+- HMR (add HMR on Dev Server)
+- HTML (make and manage HTML file)
+- InlineCSS (inline style in page)
+- Minify (minify JavaScript)
+- NoError (disabled error)
+- ProgressBar (progress bar when compiling)
 
+You can add any plugin : install it via npm and write a new plugin file in "__env__/providers/plugins" directory with boilerplate :
+
+```js
+'use strict';
+
+const wrapper = () => provider => {
+  // Do something on provider ...
+  
+  return () => ({}); // WebPack plugin or nothing
+}
+
+module.exports = wrapper;
+```
+
+Plugins are curry function, who need arguments and return a new function who take provider and :
+
+- Return a new function like a WebPack plugin or internal plugin.
+- Can mutate provider to change anything before compilation.
+
+### How i can use a new mixin ?
+
+TODO ...

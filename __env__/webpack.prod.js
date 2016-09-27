@@ -9,11 +9,11 @@ const {
   AssetsPlugin,
   ChunkPlugin,
   DefinePlugin,
+  DevToolPlugin,
   ExtractCssPlugin,
   HtmlPlugin,
   MinifyPlugin,
   ProgressBarPlugin,
-  DevToolPlugin,
 } = require('./providers/plugins');
 
 // Provider, Mixins, Loaders and Plugins
@@ -34,13 +34,13 @@ module.exports = builder(
     JsonLoader,
   ],
   [
+    AssetsPlugin('./dist/'),
+    ChunkPlugin(),
     DefinePlugin('production'),
     DevToolPlugin(false),
-    ProgressBarPlugin(),
-    ChunkPlugin(),
-    MinifyPlugin(),
-    AssetsPlugin('./dist/'),
     ExtractCssPlugin('[name].[contenthash:8].css'),
     HtmlPlugin('./client/index.html'),
+    MinifyPlugin(),
+    ProgressBarPlugin(),
   ]
 );

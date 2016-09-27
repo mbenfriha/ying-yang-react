@@ -1,6 +1,7 @@
 'use strict';
 
-const path = require('path');
+const WebpackDevServer = require('webpack-dev-server');
+const webpack = require('webpack');
 const { filter, isEmpty, complement, cond, always, lt, gt, T } = require('ramda');
 
 const notEmpty = filter(complement(isEmpty));
@@ -24,28 +25,41 @@ const baseProvider = () => ({
     loaders: [],
   },
   plugins: [],
-  devServer: {
-    headers: { 'Access-Control-Allow-Origin': '*' },
-  },
+  devServer: {},
 });
 
-const baseServerProvider = provider => ({
+const devServerProvider = publicPath => ({
+  headers: { 'Access-Control-Allow-Origin': '*' },
   hot: true,
   historyApiFallback: true,
   compress: true,
   quiet: true,
   noInfo: false,
   stats: { colors: true },
-  publicPath: provider.output.publicPath,
+  publicPath,
   watchOptions: {
     aggregateTimeout: 300,
     poll: 50,
   },
 });
 
+const listen = baseProvider => (host, port) =>
+  new Promise((resolve, reject) =>
+    (new WebpackDevServer(webpack(baseProvider), devServerProvider(`http://${host}:${port}`)))
+      .listen(port, host, error => {
+        if (error) {
+          return reject({ errors: [error] });
+        }
+
+        return resolve(`===> Server started on http://${host}:${port}`);
+      })
+  );
+
 module.exports = {
   notEmpty,
   sort,
   hasLoader,
   baseProvider,
+  devServerProvider,
+  listen,
 };

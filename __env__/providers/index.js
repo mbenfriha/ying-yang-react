@@ -68,7 +68,7 @@ const applyMixins = mixins => provider => mergeAll([provider, ...mixins]);
 const applyPlugins = (options, plugins) => provider =>
   mergeAll([provider, {
     plugins: [
-      ...flatten(plugins.map(flip(curry(call))(provider))),
+      ...notEmpty(flatten(plugins.map(flip(curry(call))(provider)))),
       new LoaderOptionsPlugin({
         minimize: true,
         options: Object.assign({ context: __dirname }, options),

@@ -1,30 +1,30 @@
 'use strict';
 
-const { baseProvider } = require('./helpers');
+const { baseProvider, listen } = require('./helpers');
 const builder = require('./providers');
 
-const { DevToolMixin, InputMixin, OutputMixin } = require('./providers/mixins');
+const { InputMixin, OutputMixin } = require('./providers/mixins');
 const { AssetsLoader, BabelLoader, CssLoader, EsLintLoader, JsonLoader } = require('./providers/loaders');
 const {
-  DashboardPlugin,
-  NoErrorPlugin,
-  DefinePlugin,
-  HTMLPlugin,
-  DevServer,
   BrowserPlugin,
+  DashboardPlugin,
+  DefinePlugin,
+  DevToolPlugin,
+  HmrPlugin,
+  HtmlPlugin,
+  InlineCssPlugin,
+  NoErrorPlugin,
 } = require('./providers/plugins');
 
 // Provider, Mixins, Loaders and Plugins
-builder(
+const provider = builder(
   baseProvider(),
   [
-    DevToolMixin(true),
     InputMixin({
-      vendor: ['./client/vendor.js'],
-      app: ['./client/index.jsx', './client/critical.css'],
+      vendor: ['webpack-dev-server/client?http://0.0.0.0:3000', 'webpack/hot/only-dev-server', './client/vendor.js'],
+      app: ['webpack-dev-server/client?http://0.0.0.0:3000', 'webpack/hot/only-dev-server', './client/index.jsx', './client/critical.css'],
     }),
-    OutputMixin('./dist', '[name].js', ''),
-    DevServer('http://localhost', 3000),
+    OutputMixin('/__tmp__/', '[name].js', 'http://localhost:3000/'),
   ],
   [
     AssetsLoader,
@@ -34,11 +34,17 @@ builder(
     JsonLoader,
   ],
   [
-    DefinePlugin('development'),
-    NoErrorPlugin(),
+    BrowserPlugin('http://localhost', 3000),
     DashboardPlugin(),
-    HTMLPlugin(),
-    HotPlugin(),
-    BrowserPlugin('http://localhost', 3000)
+    DefinePlugin('development'),
+    DevToolPlugin(true),
+    HmrPlugin(),
+    HtmlPlugin('./client/index.html'),
+    InlineCssPlugin(),
+    NoErrorPlugin(),
   ]
 );
+
+listen(provider)('localhost', 3000)
+  .then(response => console.log(response))
+  .catch(error => console.log(error));
