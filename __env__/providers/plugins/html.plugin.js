@@ -1,13 +1,7 @@
 'use strict';
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { cond, always, lt, gt, T } = require('ramda');
-
-const sort = cond([
-  [lt, always(1)],
-  [gt, always(-1)],
-  [T, always(0)],
-]);
+const { sort } = require('../../helpers');
 
 const wrapper = template => provider =>
   new HtmlWebpackPlugin({

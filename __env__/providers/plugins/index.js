@@ -11,6 +11,7 @@ const HtmlPlugin = require('./html.plugin.js');
 const MinifyPlugin = require('./minify.plugin.js');
 const NoErrorPlugin = require('./no-error.plugin.js');
 const ProgressBarPlugin = require('./progress-bar.plugin.js');
+const DevToolPlugin = require('./dev-tool.plugin.js');
 
 module.exports = {
   AssetsPlugin,
@@ -24,4 +25,5 @@ module.exports = {
   MinifyPlugin,
   NoErrorPlugin,
   ProgressBarPlugin,
+  DevToolPlugin,
 };

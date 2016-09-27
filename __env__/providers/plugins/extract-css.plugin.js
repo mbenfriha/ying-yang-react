@@ -9,9 +9,17 @@ const wrapper = filename => provider => {
     .loaders
     .filter(hasLoader('css'))
     .forEach(loader => {
-      loader.loader = ExtractTextPlugin.extract(loader.loaders);
+      let key;
 
-      delete loader['loaders'];
+      if (loader.loaders) {
+        key = 'loaders';
+      } else {
+        key = 'loader';
+      }
+
+      loader.loader = ExtractTextPlugin.extract(loader[key]);
+
+      delete loader[key];
     });
 
   return new ExtractTextPlugin(filename);
