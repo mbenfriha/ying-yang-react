@@ -99,7 +99,7 @@ If you disallow regular object-oriented programming with class and want to use m
 
 Otherwise, you may probably need to use regular React boilerplate or make your one.
 
-You ***never*** need boilerplate to use React, an HTML file with <script> tag can do it alone.
+You ***never*** need boilerplate to use React, an HTML file with script tag can do it alone.
 
 ### I can't use class and this, what the hell ?
 
