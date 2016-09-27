@@ -306,4 +306,25 @@ Plugins are curry function, who need arguments and return a new function who tak
 
 ### How i can use a new mixin ?
 
-TODO ...
+List of available mixins :
+
+- Input (set input)
+- Output (set output)
+
+You can add any mixin : write a new mixin file in "__env__/providers/mixins" directory with boilerplate :
+
+```js
+'use strict';
+
+const wrapper = () => ({
+  /**
+   * WebPack object
+   */
+});
+
+module.exports = wrapper;
+```
+
+Mixins are function, who need arguments and return WebPack configuration object.
+
+Every mixins are apply on default configuration to build your personal configuration.
