@@ -1,10 +1,18 @@
 'use strict';
 
 const path = require('path');
-const { filter, isEmpty, complement } = require('ramda');
+const { filter, isEmpty, complement, cond, always, lt, gt, T } = require('ramda');
 
 const notEmpty = filter(complement(isEmpty));
-const hasLoader = seek => loader => loader.loaders.includes(seek);
+
+const sort = cond([
+  [lt, always(1)],
+  [gt, always(-1)],
+  [T, always(0)],
+]);
+
+const hasLoader = seek => loader =>
+  loader.loaders ? loader.loaders.includes(seek) : loader.loader === seek;
 
 const baseProvider = () => ({
   entry: {},
@@ -13,9 +21,7 @@ const baseProvider = () => ({
     extensions: [],
   },
   module: {
-    preLoaders: [],
     loaders: [],
-    postLoaders: [],
   },
   plugins: [],
   devServer: {
@@ -39,6 +45,7 @@ const baseServerProvider = provider => ({
 
 module.exports = {
   notEmpty,
+  sort,
   hasLoader,
   baseProvider,
 };
