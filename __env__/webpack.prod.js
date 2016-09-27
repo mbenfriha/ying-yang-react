@@ -35,7 +35,7 @@ module.exports = builder(
   ],
   [
     DefinePlugin('production'),
-    DevToolPlugin(true),
+    DevToolPlugin(false),
     ProgressBarPlugin(),
     ChunkPlugin(),
     MinifyPlugin(),
