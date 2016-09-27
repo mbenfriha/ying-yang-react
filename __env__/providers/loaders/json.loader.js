@@ -8,7 +8,7 @@ const pre = {};
 
 const loader = {
   test: /\.json$/,
-  loaders: ['file'],
+  loader: 'file',
   exclude: [/node_modules/],
 };
 

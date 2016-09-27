@@ -12,7 +12,7 @@ const pre = {};
 
 const loader = {
   test: /\.(js|jsx)$/,
-  loaders: ['babel'],
+  loader: 'babel',
   exclude: [/node_modules/],
 };
 
