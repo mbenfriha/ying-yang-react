@@ -46,13 +46,9 @@ const devServerProvider = publicPath => ({
 const listen = baseProvider => (host, port) =>
   new Promise((resolve, reject) =>
     (new WebpackDevServer(webpack(baseProvider), devServerProvider(`http://${host}:${port}`)))
-      .listen(port, host, error => {
-        if (error) {
-          return reject({ errors: [error] });
-        }
-
-        return resolve(`===> Server started on http://${host}:${port}`);
-      })
+      .listen(port, host, error =>
+        error ? reject(`===> Server can't start : ${error}`) : resolve(`===> Server started on http://${host}:${port}`)
+      )
   );
 
 module.exports = {
