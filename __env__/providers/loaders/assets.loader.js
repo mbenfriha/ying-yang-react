@@ -10,7 +10,7 @@ const loader = {
   test: /\.(png|jpe?g|gif|svg|woff2?|eot|ttf|otf|wav)(\?.*)?$/,
   loader: 'url',
   query: {
-    limit: 10,
+    limit: 10000,
     name: '[name].[hash:7].[ext]',
   },
 };
