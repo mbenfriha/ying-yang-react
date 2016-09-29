@@ -83,6 +83,11 @@
     "import/no-named-as-default": 0,
     "react/require-extension": "off"
   },
+  "globals": {
+    "METADATA": true,
+    "ENV": true,
+    "NODE_ENV": true
+  },
   "plugins": [
     "react",
     "fp"

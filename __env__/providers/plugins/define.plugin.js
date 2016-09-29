@@ -8,8 +8,7 @@ const wrapper = (env, extra = {}) => provider =>
       { 'process.env.NODE_ENV': JSON.stringify(env) },
       { NODE_ENV: JSON.stringify(env) },
       { ENV: JSON.stringify(env) },
-      { 'process.env.METADATA': JSON.stringify(extra) },
-      { 'window.METADATA': JSON.stringify(extra) }
+      { METADATA: JSON.stringify(extra) }
     )
   );
 
