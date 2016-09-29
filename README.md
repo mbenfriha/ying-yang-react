@@ -275,7 +275,7 @@ List of available plugins :
 - Browser (start browser after compiling)
 - Chunk (split code into multiple chunk)
 - Dashboard (start WebPack dashboard)
-- Define (define global variable)
+- Define (define macro-variable who can be replaced at compilation time)
 - DevTool (enabled dev tool and debug mode)
 - ExtractCSS (extract CSS into file)
 - HMR (add HMR on Dev Server)
@@ -284,6 +284,7 @@ List of available plugins :
 - Minify (minify JavaScript)
 - NoError (disabled error)
 - ProgressBar (progress bar when compiling)
+- Provide (link npm module to global scope)
 
 You can add any plugin : install it via npm and write a new plugin file in "__env__/providers/plugins" directory with boilerplate :
 
