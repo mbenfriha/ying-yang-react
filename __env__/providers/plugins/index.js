@@ -13,6 +13,7 @@ const InlineCssPlugin = require('./inline-css.plugin.js');
 const MinifyPlugin = require('./minify.plugin.js');
 const NoErrorPlugin = require('./no-error.plugin.js');
 const ProgressBarPlugin = require('./progress-bar.plugin.js');
+const ProvidePlugin = require('./provide.plugin.js');
 
 module.exports = {
   AssetsPlugin,
@@ -28,4 +29,5 @@ module.exports = {
   MinifyPlugin,
   NoErrorPlugin,
   ProgressBarPlugin,
+  ProvidePlugin,
 };
