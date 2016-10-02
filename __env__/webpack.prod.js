@@ -1,6 +1,6 @@
 'use strict';
 
-const { baseProvider } = require('./helpers');
+const { baseProvider, run } = require('./helpers');
 const builder = require('./providers');
 
 const { InputMixin, OutputMixin } = require('./providers/mixins');
@@ -17,7 +17,7 @@ const {
 } = require('./providers/plugins');
 
 // Provider, Mixins, Loaders and Plugins
-module.exports = builder(
+run(builder(
   baseProvider(),
   [
     InputMixin({
@@ -43,4 +43,4 @@ module.exports = builder(
     MinifyPlugin(),
     ProgressBarPlugin(),
   ]
-);
+));

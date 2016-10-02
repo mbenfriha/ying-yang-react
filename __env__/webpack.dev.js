@@ -17,7 +17,7 @@ const {
 } = require('./providers/plugins');
 
 // Provider, Mixins, Loaders and Plugins
-const provider = builder(
+listen(builder(
   baseProvider(),
   [
     InputMixin({
@@ -43,8 +43,6 @@ const provider = builder(
     InlineCssPlugin(),
     NoErrorPlugin(),
   ]
-);
-
-listen(provider)('localhost', 3000)
+))('localhost', 3000)
   .then(response => console.log(response))
   .catch(error => console.log(error));

@@ -43,6 +43,12 @@ const devServerProvider = publicPath => ({
   },
 });
 
+const watchProvider = () => ({ aggregateTimeout: 300, poll: true });
+
+const run = provider => webpack(provider, err => console.log(`===> Error : ${!err ? '/' : err}`));
+
+const watch = provider => webpack(provider).watch(watchProvider(), err => console.log(`===> Error : ${!err ? '/' : err}`));
+
 const listen = baseProvider => (host, port) =>
   new Promise((resolve, reject) =>
     (new WebpackDevServer(webpack(baseProvider), devServerProvider(`http://${host}:${port}`)))
@@ -57,5 +63,8 @@ module.exports = {
   hasLoader,
   baseProvider,
   devServerProvider,
+  watchProvider,
+  run,
+  watch,
   listen,
 };
